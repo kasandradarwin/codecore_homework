@@ -6,9 +6,31 @@ function drawLine(num1){
 
 //drawLine(12)
 
-
+//need to add condition for if num is 0 or 1
 function drawTopBorder(num1){
-    console.log("┏" + "━".repeat(num1-2) + "┓")
+    if (num1 < 1){
+        console.log("┏" + "┓")
+    } else if ( num1 == 1){
+        console.log("┏" + "━"+ "┓")
+    } else {
+    console.log("┏" + "━".repeat(num1) + "┓")
+}
+}
+// drawTopBorder(0)
+// drawTopBorder(1)
+// drawTopBorder(4)
+
+function drawMiddleBorder(num1) {
+    if (num1 < 1){
+        console.log("┣" + "┫")
+    } else if ( num1 == 1){
+        console.log("┣" + "━"+ "┫")
+    } else {
+    console.log("┣" + "━".repeat(num1) + "┫")
+    }
 }
 
-drawTopBorder(12)
+// drawMiddleBorder(0)
+// drawMiddleBorder(1)
+// drawMiddleBorder(8)
+
