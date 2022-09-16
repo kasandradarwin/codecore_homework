@@ -64,22 +64,25 @@ function drawBarsAround(theString) {
 function boxIt(arr){
     let newArray =[]
     let mainArray =[]
-    for (let i = 0; i < arr.length; i++) {
-        let element = arr[i];
-        let size = arr[i].length;
+ console.log(drawTopBorder(arr[i].length) + ((drawBarsAround(arr[i])) + drawMiddleBorder(arr[i].length)).repeat(arr.length))
+}
+
+    // for (let i = 0; i < arr.length; i++) {
+    //     let element = arr[i];
+    //     let size = arr[i].length;
+    
         
-        mainArray.push(newArray = Array(arr.length).fill(drawTopBorder(size)))
-        mainArray.push(newArray = Array(arr.length).fill(drawBarsAround(element) + drawMiddleBorder(size)))
+       // mainArray.push(newArray = Array(arr.length).fill(drawTopBorder(size)))
+        //mainArray.push(newArray = Array(arr.length).fill((drawBarsAround(element) + drawMiddleBorder(size)).repeat(arr.length) + drawBottomBorder(size)))
         //mainArray.push(newArray = Array(arr.length).fill(drawMiddleBorder(size)))
         //mainArray.push(newArray = Array(arr.length).fill(drawBarsAround(element)))
-        mainArray.push(newArray = Array(arr.length).fill(drawBottomBorder(size)))
+        //mainArray.push(newArray = Array(arr.length).fill(drawBottomBorder(size)))
    
-    }
+    
     //console.log(newArray)
-    }
-    function rectangleToString(){
+    
        // console.log(newArray.join("/n"))
-    }
+    
     //rectangleToString(fillRectangle(5, 3, "🔥"))
 
 
@@ -101,4 +104,4 @@ boxIt(["Jon Snow","Cersei Lannister"])
 //     function rectangleToString(){
 //         console.log(newArray.join("/n"))
 //     }
-//     rectangleToString(fillRectangle(5, 3, "🔥"))
+//     rectangleToString(fillRectangle(5, 3, "🔥")
