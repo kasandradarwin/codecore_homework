@@ -46,3 +46,17 @@ function drawBottomBorder(num1) {
 // drawBottomBorder(0)
 // drawBottomBorder(1)
 // drawBottomBorder(8)
+
+function drawBarsAround(theString) {
+    if (theString.length < 1){
+        console.log("┃" + "┃")
+    } else if ( theString.length == 1){
+        console.log("┃" + theString+ "┃")
+    } else {
+    console.log("┃" + theString + "┃")
+    }
+}
+
+drawBarsAround("abc")
+drawBarsAround("     hello world")
+drawBarsAround("tres noches han pasado y yo lo mismo      ")
