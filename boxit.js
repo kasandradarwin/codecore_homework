@@ -34,3 +34,15 @@ function drawMiddleBorder(num1) {
 // drawMiddleBorder(1)
 // drawMiddleBorder(8)
 
+function drawBottomBorder(num1) {
+    if (num1 < 1){
+        console.log("┗" + "┛")
+    } else if ( num1 == 1){
+        console.log("┗" + "━"+ "┛")
+    } else {
+    console.log("┗" + "━".repeat(num1) + "┛")
+    }
+}
+// drawBottomBorder(0)
+// drawBottomBorder(1)
+// drawBottomBorder(8)
