@@ -57,6 +57,48 @@ function drawBarsAround(theString) {
     }
 }
 
-drawBarsAround("abc")
-drawBarsAround("     hello world")
-drawBarsAround("tres noches han pasado y yo lo mismo      ")
+// drawBarsAround("abc")
+// drawBarsAround("     hello world")
+// drawBarsAround("tres noches han pasado y yo lo mismo      ")
+
+function boxIt(arr){
+    let newArray =[]
+    let mainArray =[]
+    for (let i = 0; i < arr.length; i++) {
+        let element = arr[i];
+        let size = arr[i].length;
+        
+        mainArray.push(newArray = Array(arr.length).fill(drawTopBorder(size)))
+        mainArray.push(newArray = Array(arr.length).fill(drawBarsAround(element) + drawMiddleBorder(size)))
+        //mainArray.push(newArray = Array(arr.length).fill(drawMiddleBorder(size)))
+        //mainArray.push(newArray = Array(arr.length).fill(drawBarsAround(element)))
+        mainArray.push(newArray = Array(arr.length).fill(drawBottomBorder(size)))
+   
+    }
+    //console.log(newArray)
+    }
+    function rectangleToString(){
+       // console.log(newArray.join("/n"))
+    }
+    //rectangleToString(fillRectangle(5, 3, "🔥"))
+
+
+
+
+boxIt(["Jon Snow","Cersei Lannister"])
+
+
+// function fillRectangle(arr){
+
+//     
+    
+//     for (let i = 0; i < height; i++) {
+        
+//         newArray.push(myArray)
+//     }
+//     console.log(newArray)
+//     }
+//     function rectangleToString(){
+//         console.log(newArray.join("/n"))
+//     }
+//     rectangleToString(fillRectangle(5, 3, "🔥"))
