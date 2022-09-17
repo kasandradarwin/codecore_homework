@@ -46,41 +46,51 @@ function drawBottomBorder(num1) {
 // }
 
 function drawBarsAround(theString, longestLength) {
-    let extraBoxSize =parseInt(longestLength-theString.length)
-    let padding = " ".repeat(extraBoxSize)
-    //console.log("padding: " + padding + "<--padding ends") 
-    //console.log("x box size: " + extraBoxSize) 
-     
-    console.log("┃" + theString + padding + "┃")
+    if (longestLength > theString.length){
+        let extraBoxSize = parseInt(longestLength-theString.length)
+    
+        let padding = " ".repeat(extraBoxSize)
+        // console.log("padding: " + padding + "<--padding ends") 
+        // console.log("x box size: " + extraBoxSize)  
+        console.log("┃" + theString + padding + "┃")
+    } else {
+        console.log("┃" + theString + "┃")
     }
+}
+
 
 
 //drawBarsAround("abc", 100)
 
 function boxIt(arr){  
-//let insideOfBox;
-    for (let i = 0; i < arr.length; i++) {
-    let longestLength = arr[1].length;
-    //console.log("longestLength: "+ longestLength)
-        if (arr[i].length > longestLength){
-           const longestLength = arr[i].length;
-           //console.log("changed to: "+ longestLength)
-        }  else {
-           const longestLength = arr[i].length;
-           //console.log("changed to: "+ longestLength)
+   let longestLength = Math.max(...(arr.map(el => el.length)));
+   console.log(longestLength);
+// let longestLength;
+//    for (let i = 0; i < 1; i++) {
+//              //console.log("longestLength: "+ longestLength)
+//         if (arr[i].length > longestLength){
+//             const longestLength = arr[i].length;
+//             console.log("changed to: "+ longestLength)
+//         } else {
+//             const longestLength = arr[i].length;
+//             console.log("changed to: "+ longestLength)     
+//         } 
+        
+     console.log(`${drawTopBorder(longestLength)}`)
+
+    // so the middle bar isn't repeated at the very end
+        for (let j = 0; j < arr.length; j++) {
+            drawBarsAround(arr[j], longestLength)
+            if (j == arr.length-1){
+                break;
+            } else {
+            console.log(drawMiddleBorder(longestLength))
         }
-    console.log(`${drawTopBorder(longestLength)}`)
-    for (let j = 0; j < arr.length; j++) {
-        drawBarsAround(arr[i], longestLength)
-        console.log(drawMiddleBorder(longestLength))
-    }
-    
-    // const insideOfBox = ((drawBarsAround(arr[i], longestLength)) )
-    
-    // console.log(`${insideOfBox.repeat(2)}`)
+        }
+
     console.log(`${drawBottomBorder(longestLength)}`)
- }   
-}
+     }   
+//}
 
 
-boxIt(["Jon Snow","Cersei Lannister"])
+boxIt(["Jonnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn Snow","Cersei Lannister","hello", "Kasandra"])
