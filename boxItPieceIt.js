@@ -71,6 +71,17 @@ function boxIt(arr){
 
     console.log(`${drawBottomBorder(longestLength)}`)
      }   
+let newArr =[]
+let result = 0;
 
+for (let i = 2; i < process.argv.length; i++){
+result += process.argv[i];
+newArr.push(process.argv[i])
+}
+//console.log(newArr)
+// console.log("processargv: " + process.argv.length)
+// console.log("result : " + result);
+// console.log("Number : " + Number);
 
-boxIt(["Jon Snow","Cersei Lannister","Kasandra Darwin","Bill Tucker", "hello", "myfriends"])
+boxIt(newArr)
+//boxIt(["Jon Snow","Cersei Lannister","Kasandra Darwin","Bill Tucker", "hello", "myfriends"])
