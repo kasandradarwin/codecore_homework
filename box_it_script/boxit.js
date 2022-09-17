@@ -35,46 +35,19 @@ function drawBottomBorder(num1) {
     }
 }
 
-// function drawBarsAround(theString) {
-//     if (theString.length < 1){
-//         console.log("┃" + "┃")
-//     } else if ( theString.length == 1){
-//         console.log("┃" + theString+ "┃")
-//     } else {
-//     return("┃" + theString + "┃")
-//     }
-// }
-
 function drawBarsAround(theString, longestLength) {
     if (longestLength > theString.length){
         let extraBoxSize = parseInt(longestLength-theString.length)
     
         let padding = " ".repeat(extraBoxSize)
-        // console.log("padding: " + padding + "<--padding ends") 
-        // console.log("x box size: " + extraBoxSize)  
         console.log("┃" + theString + padding + "┃")
     } else {
         console.log("┃" + theString + "┃")
     }
 }
 
-
-
-//drawBarsAround("abc", 100)
-
 function boxIt(arr){  
    let longestLength = Math.max(...(arr.map(columnWidth => columnWidth.length)));
-   //console.log(longestLength);
-// let longestLength;
-//    for (let i = 0; i < 1; i++) {
-//              //console.log("longestLength: "+ longestLength)
-//         if (arr[i].length > longestLength){
-//             const longestLength = arr[i].length;
-//             console.log("changed to: "+ longestLength)
-//         } else {
-//             const longestLength = arr[i].length;
-//             console.log("changed to: "+ longestLength)     
-//         } 
         
      console.log(`${drawTopBorder(longestLength)}`)
 
@@ -90,7 +63,6 @@ function boxIt(arr){
 
     console.log(`${drawBottomBorder(longestLength)}`)
      }   
-//}
 
 
 boxIt(["Jon Snow","Cersei Lannister","Kasandra Darwin","Bill Tucker", "hello", "myfriends"])
