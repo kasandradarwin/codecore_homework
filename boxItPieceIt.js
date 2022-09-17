@@ -74,14 +74,10 @@ function boxIt(arr){
 let newArr =[]
 let result = 0;
 
+// iterates through the arguments passed in, pushes them to an array, passed that array into the boxit function
 for (let i = 2; i < process.argv.length; i++){
-result += process.argv[i];
-newArr.push(process.argv[i])
+    result += process.argv[i];
+    newArr.push(process.argv[i])
 }
-//console.log(newArr)
-// console.log("processargv: " + process.argv.length)
-// console.log("result : " + result);
-// console.log("Number : " + Number);
 
 boxIt(newArr)
-//boxIt(["Jon Snow","Cersei Lannister","Kasandra Darwin","Bill Tucker", "hello", "myfriends"])
