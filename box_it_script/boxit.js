@@ -63,8 +63,8 @@ function drawBarsAround(theString, longestLength) {
 //drawBarsAround("abc", 100)
 
 function boxIt(arr){  
-   let longestLength = Math.max(...(arr.map(el => el.length)));
-   console.log(longestLength);
+   let longestLength = Math.max(...(arr.map(columnWidth => columnWidth.length)));
+   //console.log(longestLength);
 // let longestLength;
 //    for (let i = 0; i < 1; i++) {
 //              //console.log("longestLength: "+ longestLength)
@@ -93,4 +93,4 @@ function boxIt(arr){
 //}
 
 
-boxIt(["Jonnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn Snow","Cersei Lannister","hello", "Kasandra"])
+boxIt(["Jon Snow","Cersei Lannister","Kasandra Darwin","Bill Tucker", "hello", "myfriends"])
