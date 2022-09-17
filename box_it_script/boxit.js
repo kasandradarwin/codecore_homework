@@ -1,107 +1,76 @@
 // In this homework, you will create a script that can take any number of arguments then outputs them inside boxes.
 
+//draws a line of the requested length
+
 function drawLine(num1){
-    console.log("━".repeat(num1))
+    return("━".repeat(num1))
 }
 
-//drawLine(12)
-
-//need to add condition for if num is 0 or 1
+// draws the top border, length determines by number passed in
 function drawTopBorder(num1){
     if (num1 < 1){
         console.log("┏" + "┓")
     } else if ( num1 == 1){
         console.log("┏" + "━"+ "┓")
     } else {
-    console.log("┏" + "━".repeat(num1) + "┓")
+    return("┏" + "━".repeat(num1) + "┓")
 }
 }
-// drawTopBorder(0)
-// drawTopBorder(1)
-// drawTopBorder(4)
 
+// draws the middle border, length determines by number passed in
 function drawMiddleBorder(num1) {
     if (num1 < 1){
         console.log("┣" + "┫")
     } else if ( num1 == 1){
         console.log("┣" + "━"+ "┫")
     } else {
-    console.log("┣" + "━".repeat(num1) + "┫")
+    return("┣" + "━".repeat(num1) + "┫")
     }
 }
 
-// drawMiddleBorder(0)
-// drawMiddleBorder(1)
-// drawMiddleBorder(8)
-
+// draws the bottom border, length determines by number passed in
 function drawBottomBorder(num1) {
     if (num1 < 1){
         console.log("┗" + "┛")
     } else if ( num1 == 1){
         console.log("┗" + "━"+ "┛")
     } else {
-    console.log("┗" + "━".repeat(num1) + "┛")
+    return("┗" + "━".repeat(num1) + "┛")
     }
 }
-// drawBottomBorder(0)
-// drawBottomBorder(1)
-// drawBottomBorder(8)
 
-function drawBarsAround(theString) {
-    if (theString.length < 1){
-        console.log("┃" + "┃")
-    } else if ( theString.length == 1){
-        console.log("┃" + theString+ "┃")
+//draws bars around the string passed in
+//since the boxIt function takes in an array-- this function adds padding to any strings shorter than the longest string
+//this way all the boxes are the same size
+function drawBarsAround(theString, longestLength) {
+    if (longestLength > theString.length){
+        let extraBoxSize = parseInt(longestLength-theString.length)
+        let padding = " ".repeat(extraBoxSize)
+        console.log("┃" + theString + padding + "┃")
     } else {
-    console.log("┃" + theString + "┃")
+        console.log("┃" + theString + "┃")
     }
 }
+//boxes the strings passed in using the above functions
 
-// drawBarsAround("abc")
-// drawBarsAround("     hello world")
-// drawBarsAround("tres noches han pasado y yo lo mismo      ")
-
-function boxIt(arr){
-    let newArray =[]
-    let mainArray =[]
- console.log(drawTopBorder(arr[i].length) + ((drawBarsAround(arr[i])) + drawMiddleBorder(arr[i].length)).repeat(arr.length))
-}
-
-    // for (let i = 0; i < arr.length; i++) {
-    //     let element = arr[i];
-    //     let size = arr[i].length;
-    
+function boxIt(arr){  
+    // grabs the length of the longest string to determine the box size
+   const longestLength = Math.max(...(arr.map(columnWidth => columnWidth.length)));
         
-       // mainArray.push(newArray = Array(arr.length).fill(drawTopBorder(size)))
-        //mainArray.push(newArray = Array(arr.length).fill((drawBarsAround(element) + drawMiddleBorder(size)).repeat(arr.length) + drawBottomBorder(size)))
-        //mainArray.push(newArray = Array(arr.length).fill(drawMiddleBorder(size)))
-        //mainArray.push(newArray = Array(arr.length).fill(drawBarsAround(element)))
-        //mainArray.push(newArray = Array(arr.length).fill(drawBottomBorder(size)))
-   
-    
-    //console.log(newArray)
-    
-       // console.log(newArray.join("/n"))
-    
-    //rectangleToString(fillRectangle(5, 3, "🔥"))
+     console.log(`${drawTopBorder(longestLength)}`)
+
+    // to fill the inside of the box, and make sure the middle bar isn't repeated at the very end
+        for (let j = 0; j < arr.length; j++) {
+            drawBarsAround(arr[j], longestLength)
+            if (j == arr.length-1){
+                break;
+            } else {
+            console.log(drawMiddleBorder(longestLength))
+        }
+        }
+
+    console.log(`${drawBottomBorder(longestLength)}`)
+     }   
 
 
-
-
-boxIt(["Jon Snow","Cersei Lannister"])
-
-
-// function fillRectangle(arr){
-
-//     
-    
-//     for (let i = 0; i < height; i++) {
-        
-//         newArray.push(myArray)
-//     }
-//     console.log(newArray)
-//     }
-//     function rectangleToString(){
-//         console.log(newArray.join("/n"))
-//     }
-//     rectangleToString(fillRectangle(5, 3, "🔥")
+boxIt(["Jon Snow","Cersei Lannister","Kasandra Darwin","Bill Tucker", "hello", "myfriends"])
