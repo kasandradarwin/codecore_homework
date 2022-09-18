@@ -8,7 +8,7 @@ function drawLine(num1){
 
 // draws the top border, length determines by number passed in
 function drawTopBorder(num1){
-    if (num1 < 1){
+    if (num1 < 1 || num1 == undefined){
         console.log("┏" + "┓")
     } else if ( num1 == 1){
         console.log("┏" + "━"+ "┓")
@@ -19,7 +19,7 @@ function drawTopBorder(num1){
 
 // draws the middle border, length determines by number passed in
 function drawMiddleBorder(num1) {
-    if (num1 < 1){
+    if (num1 < 1 || num1 == undefined){
         console.log("┣" + "┫")
     } else if ( num1 == 1){
         console.log("┣" + "━"+ "┫")
@@ -30,7 +30,7 @@ function drawMiddleBorder(num1) {
 
 // draws the bottom border, length determines by number passed in
 function drawBottomBorder(num1) {
-    if (num1 < 1){
+    if (num1 < 1 || num1 == undefined){
         console.log("┗" + "┛")
     } else if ( num1 == 1){
         console.log("┗" + "━"+ "┛")
@@ -47,10 +47,13 @@ function drawBarsAround(theString, longestLength) {
         let extraBoxSize = parseInt(longestLength-theString.length)
         let padding = " ".repeat(extraBoxSize)
         console.log("┃" + theString + padding + "┃")
+    } else if (theString == undefined) {
+        console.log("┃" + "┃")
     } else {
         console.log("┃" + theString + "┃")
     }
 }
+
 //boxes the strings passed in using the above functions
 
 function boxIt(arr){  
@@ -60,31 +63,38 @@ function boxIt(arr){
      console.log(`${drawTopBorder(longestLength)}`)
 
     // to fill the inside of the box, and make sure the middle bar isn't repeated at the very end
-        for (let j = 0; j < arr.length; j++) {
-            drawBarsAround(arr[j], longestLength)
-            if (j == arr.length-1){
-                break;
-            } else {
-            console.log(drawMiddleBorder(longestLength))
-        }
-        }
+
+    for (let j = 0; j < arr.length; j++) {
+        drawBarsAround(arr[j], longestLength)
+        if (j == arr.length-1){
+            break;
+        } else {
+        console.log(drawMiddleBorder(longestLength))
+    }
+    }
 
     console.log(`${drawBottomBorder(longestLength)}`)
-     }   
+}   
+
 let newArr =[]
 let result = 0;
 
 // iterates through the arguments passed in, pushes them to an array, passed that array into the boxit function
 
 for (let i = 2; i < process.argv.length; i++){
+    if (process.argv[i] != undefined){
     result += process.argv[i];
     newArr.push(process.argv[i])
-} 
+} else {
+    console.log("PC load letter??")
+}
+}
             
 
 
-if (process.argv[2] != null){ 
+if (process.argv[2] != undefined){ 
     boxIt(newArr)
 } else {
-    console.log("yes")
+    console.log(`${drawTopBorder(0)}`)
+    console.log(`${drawBottomBorder(0)}`)
 }
