@@ -75,9 +75,16 @@ let newArr =[]
 let result = 0;
 
 // iterates through the arguments passed in, pushes them to an array, passed that array into the boxit function
+
 for (let i = 2; i < process.argv.length; i++){
     result += process.argv[i];
     newArr.push(process.argv[i])
-}
+} 
+            
 
-boxIt(newArr)
+
+if (process.argv[2] != null){ 
+    boxIt(newArr)
+} else {
+    console.log("yes")
+}
