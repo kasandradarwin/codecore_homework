@@ -20,9 +20,9 @@ function drawTopBorder(num1){
 // draws the middle border, length determines by number passed in
 function drawMiddleBorder(num1) {
     if (num1 < 1 || num1 == undefined){
-        console.log("┣" + "┫")
+        return("┣" + "┫")
     } else if ( num1 == 1){
-        console.log("┣" + "━"+ "┫")
+        return("┣" + "━"+ "┫")
     } else {
     return("┣" + "━".repeat(num1) + "┫")
     }
@@ -98,3 +98,4 @@ if (process.argv[2] != undefined){
     console.log(`${drawTopBorder(0)}`)
     console.log(`${drawBottomBorder(0)}`)
 }
+
