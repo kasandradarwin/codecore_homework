@@ -86,4 +86,14 @@ for (let i = 2; i < process.argv.length; i++){
     newArr.push(process.argv[i])
 } 
 
-boxIt(newArr)
+        
+// if (process.argv[2] != undefined){ 
+   boxIt(newArr)
+// } else {
+    // console.log(`${drawTopBorder(0)}`)
+    // console.log(`${drawBottomBorder(0)}`)
+//}
+//////////////
+/////////////
+/////////////
+
