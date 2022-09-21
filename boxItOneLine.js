@@ -60,21 +60,23 @@ function boxIt(arr){
     // grabs the length of the longest string to determine the box size
    const longestLength = Math.max(...(arr.map(columnWidth => columnWidth.length)));
         
-     console.log(`${drawTopBorder(longestLength)}`)
+     console.log(`${drawTopBorder(longestLength)}` ${\n}  )
 
     // to fill the inside of the box, and make sure the middle bar isn't repeated at the very end
 
-    for (let j = 0; j < arr.length; j++) {
-        drawBarsAround(arr[j], longestLength)
-        if (j == arr.length-1){
-            break;
-        } else {
-        console.log(drawMiddleBorder(longestLength))
-    }
-    }
+    //commenting this for now.. going to try to get it into one line
 
-    console.log(`${drawBottomBorder(longestLength)}`)
-}   
+//     for (let j = 0; j < arr.length; j++) {
+//         drawBarsAround(arr[j], longestLength)
+//         if (j == arr.length-1){
+//             break;
+//         } else {
+//         console.log(drawMiddleBorder(longestLength))
+//     }
+//     }
+
+//     console.log(`${drawBottomBorder(longestLength)}`)
+// }   
 
 let newArr =[]
 let result = 0;
@@ -86,14 +88,6 @@ for (let i = 2; i < process.argv.length; i++){
     newArr.push(process.argv[i])
 } 
 
-        
-// if (process.argv[2] != undefined){ 
    boxIt(newArr)
-// } else {
-    // console.log(`${drawTopBorder(0)}`)
-    // console.log(`${drawBottomBorder(0)}`)
-//}
-//////////////
-/////////////
-/////////////
+
 
