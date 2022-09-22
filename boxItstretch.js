@@ -1,6 +1,25 @@
 // copy of boxit.js, going to try to add in the argv stuff
 
-//draws a line of the requested length
+// //draws a line of the requested length
+const data = []
+const fs = require("fs");
+const { parse } = require("csv-parse");
+fs.createReadStream("./characters.csv");
+
+fs.createReadStream("./characters.csv")
+  .pipe(parse({ delimiter: ",", from_line: 1, column: true }))
+  .on("data", function (row){
+    let arr = row.toString()
+    data.push(arr)
+    //console.log("Inside: ", typeof data)
+  }) .on("end", function () {
+        //console.log("finished");
+       boxIt(data)
+    });
+
+    
+  //})
+
 
 function drawLine(num1){
     return("━".repeat(num1))
@@ -58,9 +77,9 @@ function drawBarsAround(theString, longestLength) {
 
 function boxIt(arr){  
 //if no values are passed in, provides default values
-    if (newArr.length <1){
-        arr = ['Jon Snow', 'Cersei Lannister', 'Daenerys Targaryen']
-    }
+    // if (newArr.length <1){
+    //     //arr = ['Jon Snow', 'Cersei Lannister', 'Daenerys Targaryen']
+    // }
     // grabs the length of the longest string to determine the box size
    const longestLength = Math.max(...(arr.map(columnWidth => columnWidth.length)));
         
@@ -90,4 +109,4 @@ for (let i = 2; i < process.argv.length; i++){
     newArr.push(process.argv[i])
 } 
 
-boxIt(newArr)
+//boxIt(newArr)
