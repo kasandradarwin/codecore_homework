@@ -11,14 +11,11 @@ fs.createReadStream("./characters.csv")
   .on("data", function (row){
     let arr = row.toString()
     data.push(arr)
-    //console.log("Inside: ", typeof data)
+
   }) .on("end", function () {
-        //console.log("finished");
        boxIt(data)
     });
 
-    
-  //})
 
 
 function drawLine(num1){
