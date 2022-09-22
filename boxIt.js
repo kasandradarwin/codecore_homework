@@ -1,4 +1,7 @@
-// copy of boxit.js, going to try to add in the argv stuff
+// to run this file, try: node boxIt.js followed by your arguments.
+// eg: node boxIt.js Hello my friends
+// each word should be in a different box, all the same size as the largest. I've added default arguments in as well.
+
 
 //draws a line of the requested length
 
@@ -91,3 +94,6 @@ for (let i = 2; i < process.argv.length; i++){
 } 
 
 boxIt(newArr)
+
+
+

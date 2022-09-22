@@ -1,3 +1,6 @@
+//you can ignore this file.
+//This was the original file before I added in the process.argv into the assignment.
+
 // In this homework, you will create a script that can take any number of arguments then outputs them inside boxes.
 
 //draws a line of the requested length

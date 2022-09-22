@@ -1,16 +1,20 @@
-// copy of boxit.js, going to try to add in the argv stuff
+//homework with the stretch portion: adding a csv
 
-// //draws a line of the requested length
-
-
-//// just testing this last comment
+//empty array to push the csv data, plus some things to make the connection
 const data = []
 const fs = require("fs");
 const { parse } = require("csv-parse");
 fs.createReadStream("./characters.csv");
 
+//read from csv, declaring where to break things up, and where to start. In this case we don't want to ignore the headings
+//so we start from_line: 1 
+
 fs.createReadStream("./characters.csv")
   .pipe(parse({ delimiter: ",", from_line: 1, column: true }))
+
+//converts the data to a string, and then pushes is it into our 
+//empty data array so we can call the box it function with the csv data
+
   .on("data", function (row){
     let arr = row.toString()
     data.push(arr)
@@ -20,12 +24,13 @@ fs.createReadStream("./characters.csv")
     });
 
 
+//draws a line of the requested length
 
 function drawLine(num1){
     return("━".repeat(num1))
 }
 
-// draws the top border, length determines by number passed in
+// draws the top border, length determined by number passed in
 function drawTopBorder(num1){
     if (num1 < 1 || num1 == undefined){
         console.log("┏" + "┓")
@@ -76,10 +81,12 @@ function drawBarsAround(theString, longestLength) {
 //boxes the strings passed in using the above functions
 
 function boxIt(arr){  
-//if no values are passed in, provides default values
+//if no values are passed in, provides default values. Commented this out because it interferes with the csv reading above
+
     // if (newArr.length <1){
-    //     //arr = ['Jon Snow', 'Cersei Lannister', 'Daenerys Targaryen']
+    //     arr = ['Jon Snow', 'Cersei Lannister', 'Daenerys Targaryen']
     // }
+
     // grabs the length of the longest string to determine the box size
    const longestLength = Math.max(...(arr.map(columnWidth => columnWidth.length)));
         
@@ -102,11 +109,13 @@ function boxIt(arr){
 let newArr = []
 let result = 0;
 
-// iterates through the arguments passed in, pushes them to an array, passed that array into the boxit function
+// iterates through the arguments passed in, pushes them to an array, passes that array into the boxit function
 if (process.argv[2])
 for (let i = 2; i < process.argv.length; i++){
     result += process.argv[i];
     newArr.push(process.argv[i])
 } 
 
-//boxIt(newArr)
+
+
+
