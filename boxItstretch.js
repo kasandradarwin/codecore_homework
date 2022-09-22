@@ -57,6 +57,10 @@ function drawBarsAround(theString, longestLength) {
 //boxes the strings passed in using the above functions
 
 function boxIt(arr){  
+//if no values are passed in, provides default values
+    if (newArr.length <1){
+        arr = ['Jon Snow', 'Cersei Lannister', 'Daenerys Targaryen']
+    }
     // grabs the length of the longest string to determine the box size
    const longestLength = Math.max(...(arr.map(columnWidth => columnWidth.length)));
         
@@ -76,11 +80,11 @@ function boxIt(arr){
     console.log(`${drawBottomBorder(longestLength)}`)
 }   
 
-let newArr =[]
+let newArr = []
 let result = 0;
 
 // iterates through the arguments passed in, pushes them to an array, passed that array into the boxit function
-
+if (process.argv[2])
 for (let i = 2; i < process.argv.length; i++){
     result += process.argv[i];
     newArr.push(process.argv[i])
