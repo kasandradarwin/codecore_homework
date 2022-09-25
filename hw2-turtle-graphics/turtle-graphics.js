@@ -21,8 +21,9 @@ class Turtle {
          //Y axis = North <> South
 
          forward = function(steps) {
-        
-            if(direction == "north") {
+            console.log(steps)
+            console.log(direction)
+            if(this.direction == "north") {
                 this.y = this.y-steps
             } else if (direction == "east") {
                 this.x = this.x + steps
@@ -38,10 +39,12 @@ class Turtle {
  
     
     let flash = new Turtle(0, 0)
-    console.log(flash.forward(5))
+   flash.forward(5)
+
+
 
     //console.log(flash.forward(5).right().forward(5).right().forward(5).right().forward(5).print())
-    console.log(camino)
+    //console.log(camino)
 
 
         //Create a right method that takes zero arguments.
