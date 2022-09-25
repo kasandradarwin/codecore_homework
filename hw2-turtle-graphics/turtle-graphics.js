@@ -12,6 +12,7 @@ class Turtle {
         this.x = x;
         this.y = y;
         camino.push([this.x, this.y])
+       // console.log(typeof(this.y)) // = number
         this.direction = "east"
     }
 
@@ -29,20 +30,23 @@ class Turtle {
 
          forward(steps) {
             this.direction = this.currentdirection();
-            this.y = parseInt(this.y)
-            this.x = parseInt(this.x)
-            steps = parseInt(steps)
-            //console.log(steps)
+            this.y = this.y
+            this.x = this.x
+            //steps = steps
+            
+            console.log(steps)
             //console.log("forward direction: " + this.direction)
             if(this.direction === "north") {
-                this.y = this.y-steps
+                this.y -= steps
+
             } else if (this.direction === "east") {
-                this.x = (this.x) + steps
-               console.log("thisx + steps = " + this.x + steps)
+                this.x += steps
+                
             } else if (this.direction === "south") {
-                this.y = this.y + steps
+                this.y += steps
+
             } else if (this.direction === "west") {
-                this.x = this.x - steps
+                this.x -= steps
             }
             camino.push([this.x, this.y])   
             //console.log("forward pushed: " + this.x + " and " + this.y)
@@ -53,8 +57,7 @@ class Turtle {
 
             right() {
                 this.direction = this.currentdirection();
-                
-
+            
                 if (this.direction === "north") {
                     this.direction = "east"
 
@@ -100,40 +103,11 @@ class Turtle {
                 return(camino)
             }
             
-            gridsize(){
-                for (let i=0; i<= camino.length; i++){
-                    console.log(`this.width( ${this.width}) + i[0] (${i[0]})`)
-                   this.width = this.width + i[0];
-                   console.log(`this.height( ${this.height}) + i[1] (${i[1]})`)
-                    this.height = this.height + i[1]
-                }
-                console.log("gridsize return: " + this.width + this.height)
-            }
-
-            //might need recursion here?
-            print(){
-                this.gridsize = parseInt(this.gridsize())
-                console.log(this.gridsize)
-                let creategrid = Array(this.gridsize).fill("⏺");
-                let fillgrid =[]
-
-                console.log("--BEGIN LOG")
-                //console.log(camino.length)
-                
-                for (let i=0; i<camino.length; i++){
-                    //console.log("i is: " + [i])
-                    //if (i != )
-                    //console.log("⏺")
-                    fillgrid.push(creategrid)
-                }
-                console.log(fillgrid)
-                
-
-                 // function fillGrid(print("⏺")){
-            //     console.log(camino.join("\n"))
-            // }
         
-            
+
+    
+            print(){
+           
 
                 console.log("--END LOG")
 
