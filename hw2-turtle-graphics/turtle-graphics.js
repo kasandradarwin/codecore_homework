@@ -3,23 +3,20 @@
 
 // To begin drawing, your program needs to know where it should begin. 
 //Create a Turtle class whose constructor will take two arguments (in order): x & y coordinates. 
-const camino = [];
-const allPoints = [];
+
 let width; // in the grid size function -- will set the max width/x
 let height; // will set the max height/y axis of the grid
 
-console.log("hello world")
-process.stdout.write("hello world")
-
 class Turtle {
-    constructor(x=0,y=0){
-        this.x = x;
-        this.y = y;
-        camino.push([this.x, this.y])
-        allPoints.push([x-this.x, y-this.y])
-        console.log(allPoints)
-       // console.log(typeof(this.y)) // = number
+    constructor(x,y){
+        this.x = x || 0;
+        this.y = y || 0;
+        this.steps = this.steps || 0;
+        this.camino = [];
+        this.camino.push([this.x, this.y])
+        //caminoplussteps.push([this.x,this.y, this.steps])
         this.direction = "east"
+
     }
 
         //Create a forward method that takes a # of steps then updates the Turtle instance with its new position after moving that many steps.
@@ -38,7 +35,6 @@ class Turtle {
             this.direction = this.currentdirection();
             this.y = this.y
             this.x = this.x
-            //steps = steps
             
             console.log(steps)
             //console.log("forward direction: " + this.direction)
@@ -54,8 +50,8 @@ class Turtle {
             } else if (this.direction === "west") {
                 this.x -= steps
             }
-            camino.push([this.x, this.y])   
-            //console.log("forward pushed: " + this.x + " and " + this.y)
+            this.camino.push([this.x, this.y])   
+            return this;
             } 
         //Create a right method that takes zero arguments.
         // When right is called, update the Turtle instance to rotate its facing to the right. 
@@ -76,9 +72,10 @@ class Turtle {
                 } else if (this.direction === "west") {
                     this.direction = "north"
                 }
-                camino.push([this.x, this.y])   
-            //console.log("right function, direction changed to: ",this.direction)
-            //console.log("from right, pushed", this.x + " and " + this.y)
+                this.camino.push([this.x, this.y])  
+                
+                return this;
+
             }
 
             // Create a left method like right but turns the turtle's facing to the left.
@@ -99,14 +96,13 @@ class Turtle {
                 } else if (this.direction === "west") {
                     this.direction = "south"
                 }
-                camino.push([this.x, this.y]) 
-                //console.log("from left, pushed", this.x + " and " + this.y)
-                //console.log("left function, direction changed to: ",this.direction)
+                this.camino.push([this.x, this.y]) 
+                return this;
             }
 
             allPoints(){
-                console.log("from all points: " ,camino)
-                return(camino)
+                console.log("from all points: " ,this.camino)
+                return(this.camino)
             }
             
         
@@ -114,16 +110,22 @@ class Turtle {
     
             print(){
                 //accessing the final items in the array, saving them to a variable to create the grid size
-                let last= camino.length-1;
-                let lastitem=(camino[last])
-                let maxwidth = lastitem[0]
-                let maxheight = lastitem[1]
+                let last= this.camino.length-1;
+                let lastitem=(this.camino[last])
+                this.maxwidth = lastitem[0]
+                this.maxheight = lastitem[1]
+        
                 // console.log("maxw: " + maxwidth)
                 // console.log("maxh: " +  maxheight)
-                const gridConstructorArr = Array(maxwidth).fill("☐");
+                const gridConstructorArr = Array(this.maxwidth).fill("☐");
                 //console.log(gridConstructorArr.join(","))
+                for (let item in this.camino){
 
-                for (let i = 0; i < maxheight; i++) {
+
+                }
+                    
+                
+                for (let j = 0; j < this.maxheight; j++) {
                     let grid = (gridConstructorArr.join(","))
                     console.log(grid)
                     
@@ -138,18 +140,14 @@ class Turtle {
 
             }
 
-        
-     }
+}
+     
     
-    let flash = new Turtle(6, 6)
+    const flash = new Turtle(3, 9)
 
    
-    flash.forward(7)
-    flash.left()
-    flash.forward(3)
-    flash.right()
-    flash.forward(9)
-    flash.print();
+    flash.forward(7).right().forward(3).left().print()
+
 
      //flash.allPoints()
 
@@ -176,4 +174,4 @@ class Turtle {
 //     .print()
 
 
-
+            
