@@ -4,14 +4,20 @@
 // To begin drawing, your program needs to know where it should begin. 
 //Create a Turtle class whose constructor will take two arguments (in order): x & y coordinates. 
 const camino = [];
+const allPoints = [];
 let width; // in the grid size function -- will set the max width/x
 let height; // will set the max height/y axis of the grid
+
+console.log("hello world")
+process.stdout.write("hello world")
 
 class Turtle {
     constructor(x=0,y=0){
         this.x = x;
         this.y = y;
         camino.push([this.x, this.y])
+        allPoints.push([x-this.x, y-this.y])
+        console.log(allPoints)
        // console.log(typeof(this.y)) // = number
         this.direction = "east"
     }
@@ -41,7 +47,7 @@ class Turtle {
 
             } else if (this.direction === "east") {
                 this.x += steps
-                
+
             } else if (this.direction === "south") {
                 this.y += steps
 
@@ -104,30 +110,47 @@ class Turtle {
             }
             
         
-
+            
     
             print(){
-           
+                //accessing the final items in the array, saving them to a variable to create the grid size
+                let last= camino.length-1;
+                let lastitem=(camino[last])
+                let maxwidth = lastitem[0]
+                let maxheight = lastitem[1]
+                // console.log("maxw: " + maxwidth)
+                // console.log("maxh: " +  maxheight)
+                const gridConstructorArr = Array(maxwidth).fill("☐");
+                //console.log(gridConstructorArr.join(","))
 
+                for (let i = 0; i < maxheight; i++) {
+                    let grid = (gridConstructorArr.join(","))
+                    console.log(grid)
+                    
+                }
+
+  
+                console.log("--BEGIN LOG")
+            
+        
                 console.log("--END LOG")
+               
 
             }
 
         
      }
     
-    let flash = new Turtle(0, 0)
+    let flash = new Turtle(6, 6)
 
-    flash.forward(8)
-     flash.forward(3)
-
-     flash.forward(6)
-
-
-    flash.right()
-    flash.forward(3)
+   
+    flash.forward(7)
     flash.left()
-     flash.print()
+    flash.forward(3)
+    flash.right()
+    flash.forward(9)
+    flash.print();
+
      //flash.allPoints()
 
 
