@@ -4,8 +4,8 @@
 // To begin drawing, your program needs to know where it should begin. 
 //Create a Turtle class whose constructor will take two arguments (in order): x & y coordinates. 
 
-let width; // in the grid size function -- will set the max width/x
-let height; // will set the max height/y axis of the grid
+//let width; // in the grid size function -- will set the max width/x
+//let height; // will set the max height/y axis of the grid
 
 class Turtle {
     constructor(x,y){
@@ -14,7 +14,6 @@ class Turtle {
         this.steps = this.steps || 0;
         this.camino = [];
         this.camino.push([this.x, this.y])
-        //caminoplussteps.push([this.x,this.y, this.steps])
         this.direction = "east"
 
     }
@@ -82,7 +81,6 @@ class Turtle {
 
             left() {
                 this.direction = this.currentdirection();
-                //console.log(this.direction)
 
                 if (this.direction === "north") {
                     this.direction = "west"
@@ -114,11 +112,8 @@ class Turtle {
                 let lastitem=(this.camino[last])
                 this.maxwidth = lastitem[0]
                 this.maxheight = lastitem[1]
-        
-                // console.log("maxw: " + maxwidth)
-                // console.log("maxh: " +  maxheight)
+       
                 const gridConstructorArr = Array(this.maxwidth).fill("☐");
-                //console.log(gridConstructorArr.join(","))
                 for (let item in this.camino){
 
 
@@ -126,7 +121,7 @@ class Turtle {
                     
                 
                 for (let j = 0; j < this.maxheight; j++) {
-                    let grid = (gridConstructorArr.join(","))
+                    let grid = (gridConstructorArr.join(" "))
                     console.log(grid)
                     
                 }
@@ -143,10 +138,10 @@ class Turtle {
 }
      
     
-    const flash = new Turtle(3, 9)
+    const flash = new Turtle(0, 0)
 
    
-    flash.forward(7).right().forward(3).left().print()
+    flash.forward(7).right().forward(3).left().forward(2).print()
 
 
      //flash.allPoints()
