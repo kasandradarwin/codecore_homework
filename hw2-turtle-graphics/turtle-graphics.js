@@ -11,9 +11,12 @@ class Turtle {
     constructor(x,y){
         this.x = x || 0;
         this.y = y || 0;
-        this.steps = this.steps || 0;
+        // this.steps = this.steps || 0;
         this.camino = [];
+        this.allpoints = [];
         this.camino.push([this.x, this.y])
+        this.allpoints.push([x,y])
+        //console.log(this.allpoints)
         this.direction = "east"
 
     }
@@ -39,17 +42,22 @@ class Turtle {
             //console.log("forward direction: " + this.direction)
             if(this.direction === "north") {
                 this.y -= steps
+                this.allpoints.push([this.x,this.y])
 
             } else if (this.direction === "east") {
                 this.x += steps
+                this.allpoints.push([this.x,this.y])
 
             } else if (this.direction === "south") {
                 this.y += steps
+                this.allpoints.push([this.x,this.y])
 
             } else if (this.direction === "west") {
                 this.x -= steps
+                this.allpoints.push([this.x,this.y])
             }
             this.camino.push([this.x, this.y])   
+
             return this;
             } 
         //Create a right method that takes zero arguments.
@@ -71,7 +79,6 @@ class Turtle {
                 } else if (this.direction === "west") {
                     this.direction = "north"
                 }
-                this.camino.push([this.x, this.y])  
                 
                 return this;
 
@@ -94,26 +101,24 @@ class Turtle {
                 } else if (this.direction === "west") {
                     this.direction = "south"
                 }
-                this.camino.push([this.x, this.y]) 
                 return this;
             }
 
             allPoints(){
-                console.log("from all points: " ,this.camino)
-                return this.camino;
+             //console.log("allpoints: " + this.allpoints);
+              return this.allpoints;
             }
             
         
-            
-    
             print(){
                 //accessing the final items in the array, saving them to a variable to create the grid size
+                this.startingplace = this.allpoints[0];
                 let last= this.camino.length-1;
                 let lastitem=(this.camino[last])
                 this.maxwidth = lastitem[0]
                 this.maxheight = lastitem[1]
                 this.xplot =[];
-                this.yplot = [];
+                this.yplot =[];
        
                 const sizerequired = Array(this.maxwidth);
 
@@ -123,10 +128,10 @@ class Turtle {
                 }   
                     console.log("to plot x: " + this.xplot)
                     console.log("to plot y: " + this.yplot)
-                    // if ([i] =! this.camino[i]){
-                    //     sizerequired.fill("☐")
-                    // }
-                    // console.log(this.camino[i])
+                    // console.log(Math.min(...this.yplot))
+                    // console.log(Math.min(...this.xplot))
+                    // console.log(Math.max(...this.yplot))
+                    // console.log(Math.max(...this.xplot))
                     
                 
 
@@ -154,16 +159,11 @@ class Turtle {
      
     
     const flash = new Turtle(0, 0)
+    
 
    
-    flash.forward(7).right().forward(3).left().forward(2).print()
-
-
-     //flash.allPoints()
-
-
-   
-  
+    flash.forward(1).right().forward(3).print();
+    flash.allPoints()
 
 
 
