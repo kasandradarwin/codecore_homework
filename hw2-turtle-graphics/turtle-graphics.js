@@ -47,7 +47,7 @@ class Turtle {
 
             right() {
                 this.direction = this.currentdirection();
-                console.log(this.direction)
+                //console.log(this.direction)
 
                 if (this.direction === "north") {
                     this.direction = "east"
@@ -62,14 +62,35 @@ class Turtle {
                     this.direction = "north"
                 }
                 camino.push([this.x, this.y])   
-            console.log("right function, direction changed to: ",this.direction)
-            
+            //console.log("right function, direction changed to: ",this.direction)
+            }
 
+            // Create a left method like right but turns the turtle's facing to the left.
+
+            left() {
+                this.direction = this.currentdirection();
+                console.log(this.direction)
+
+                if (this.direction === "north") {
+                    this.direction = "west"
+
+                } else if (this.direction == "east") {
+                    this.direction = "north"
+
+                } else if (this.direction === "south") {
+                    this.direction = "east"
+
+                } else if (this.direction === "west") {
+                    this.direction = "south"
+                }
+                camino.push([this.x, this.y]) 
+                console.log("left function, direction changed to: ",this.direction)
             }
      }
  
     
     let flash = new Turtle(0, 0)
+    flash.left()
    
   
 
@@ -88,10 +109,7 @@ class Turtle {
         // }
 
         // Create a left method like right but turns the turtle's facing to the left.
-        // this.left = function () {
-        //     this.direction = west;
-        //     camino.push()
-//         // }
+
 
     
 
