@@ -10,7 +10,7 @@ class Turtle {
     constructor(x,y){
         this.x = x || 0;
         this.y = y || 0;
-        camino.push = [[this.x, this.y]]
+        camino.push([this.x, this.y])
         this.direction = "east"
     }
 
@@ -22,9 +22,6 @@ class Turtle {
 
          forward = function(steps) {
         
-            this.steps = steps;
-            this.x += steps;
-            this.y += steps
             if(direction == "north") {
                 this.y = this.y-steps
             } else if (direction == "east") {
@@ -40,8 +37,8 @@ class Turtle {
      }
  
     
-    const flash = new Turtle(0, 0)
-    console.log(flash.forward(5).forward(3).forward(2))
+    let flash = new Turtle(0, 0)
+    console.log(flash.forward(5))
 
     //console.log(flash.forward(5).right().forward(5).right().forward(5).right().forward(5).print())
     console.log(camino)
