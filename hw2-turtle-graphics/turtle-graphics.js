@@ -100,7 +100,7 @@ class Turtle {
 
             allPoints(){
                 console.log("from all points: " ,this.camino)
-                return(this.camino)
+                return this.camino;
             }
             
         
@@ -112,19 +112,34 @@ class Turtle {
                 let lastitem=(this.camino[last])
                 this.maxwidth = lastitem[0]
                 this.maxheight = lastitem[1]
+                this.xplot =[];
+                this.yplot = [];
        
-                const gridConstructorArr = Array(this.maxwidth).fill("☐");
-                for (let item in this.camino){
+                const sizerequired = Array(this.maxwidth);
 
-
-                }
+                for (let i = 0; i < this.camino.length; i++) {
+                    this.xplot.push(this.camino[i][0])
+                    this.yplot.push(this.camino[i][1])
+                }   
+                    console.log("to plot x: " + this.xplot)
+                    console.log("to plot y: " + this.yplot)
+                    // if ([i] =! this.camino[i]){
+                    //     sizerequired.fill("☐")
+                    // }
+                    // console.log(this.camino[i])
                     
                 
-                for (let j = 0; j < this.maxheight; j++) {
-                    let grid = (gridConstructorArr.join(" "))
-                    console.log(grid)
+
+
+                console.log(sizerequired)
+            
                     
-                }
+                
+                // for (let j = 0; j < this.maxheight; j++) {
+                //     let grid = (gridConstructorArr.join(" "))
+                //     console.log(grid)
+                    
+                // }
 
   
                 console.log("--BEGIN LOG")
