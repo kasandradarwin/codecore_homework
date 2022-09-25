@@ -20,31 +20,63 @@ class Turtle {
          //X axis = West <> East
          //Y axis = North <> South
 
-         forward = function(steps) {
-            console.log(steps)
-            console.log(direction)
-            if(this.direction == "north") {
-                this.y = this.y-steps
-            } else if (direction == "east") {
-                this.x = this.x + steps
-            } else if (direction == "south") {
-                this.y = this.y + steps
-            } else if (direction == "west") {
-                this.x = this.x - steps
+        currentdirection() {
+            return this.direction;
+         }
+
+    
+
+         forward(steps) {
+            this.direction = this.currentdirection();
+            //console.log(steps)
+            //console.log(direction)
+            if(this.direction === "north") {
+                this.y === this.y-steps
+            } else if (this.direction === "east") {
+                this.x === this.x + steps
+            } else if (this.direction === "south") {
+                this.y === this.y + steps
+            } else if (this.direction === "west") {
+                this.x === this.x - steps
             }
             camino.push([this.x, this.y])   
             } 
-            //right : function() {}
+        //Create a right method that takes zero arguments.
+        // When right is called, update the Turtle instance to rotate its facing to the right. 
+        // A turtle should begin facing east.
+
+            right() {
+                this.direction = this.currentdirection();
+                console.log(this.direction)
+
+                if (this.direction === "north") {
+                    this.direction = "east"
+
+                } else if (this.direction == "east") {
+                    this.direction = "south"
+
+                } else if (this.direction === "south") {
+                    this.direction = "west"
+
+                } else if (this.direction === "west") {
+                    this.direction = "north"
+                }
+                camino.push([this.x, this.y])   
+            console.log("right function, direction changed to: ",this.direction)
+            
+
+            }
      }
  
     
     let flash = new Turtle(0, 0)
-   flash.forward(5)
+   
+  
 
 
 
     //console.log(flash.forward(5).right().forward(5).right().forward(5).right().forward(5).print())
-    //console.log(camino)
+    console.log(camino)
 
 
         //Create a right method that takes zero arguments.
@@ -61,9 +93,7 @@ class Turtle {
         //     camino.push()
 //         // }
 
-        this.allPoints = function (){
-            console.log(this.camino)
-        }
+    
 
         // print(){
         //     console.log("--BEGIN LOG")
