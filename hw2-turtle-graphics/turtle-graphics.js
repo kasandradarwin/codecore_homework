@@ -11,14 +11,11 @@ class Turtle {
     constructor(x,y){
         this.x = x || 0;
         this.y = y || 0;
-        // this.steps = this.steps || 0;
         this.camino = [];
         this.allpoints = [];
         this.camino.push([this.x, this.y])
         this.allpoints.push([x,y])
-        //console.log(this.allpoints)
         this.direction = "east"
-
     }
 
         //Create a forward method that takes a # of steps then updates the Turtle instance with its new position after moving that many steps.
@@ -34,31 +31,32 @@ class Turtle {
 
          forward(steps) {
             //this.direction = this.currentdirection();
-            //console.log("forward: " + steps)
-            for(let z = 0; z == steps; z++) {
-                console.log("helloooooooooo")
+            for(let z = 0; z <=steps; z++) {
+
                 if (this.direction === "north") {
                     this.y--
                     this.allpoints.push([this.x,this.y])
-                    console.log("pushing from forward" + this.allpoints)
+                   // console.log(" north y--")
 
                 } else if (this.direction === "east") {
                     this.x++
                     this.allpoints.push([this.x,this.y])
-                    console.log("pushing from forward" + this.allpoints)
+                    //console.log(" east x++")
+                    //console.log(this.x,this.y)
 
                 } else if (this.direction === "south") {
                     this.y++
                     this.allpoints.push([this.x,this.y])
-                    console.log("pushing from forward" + this.allpoints)
+                    //console.log(" south y++")
 
                 } else if (this.direction === "west") {
                     this.x--
                     this.allpoints.push([this.x,this.y])
-                    console.log("pushing from forward" + this.allpoints)
+                    //console.log(" west x--")
                 }
         }
             this.camino.push([this.x, this.y])   
+            //console.log(this.allpoints)
 
             return this;
             } 
@@ -107,14 +105,17 @@ class Turtle {
             }
 
             allPoints(){
-             console.log("allpoints: " + this.allpoints);
-              return this.allpoints;
+             for (let i = 0; i < this.allpoints.length; i++) {
+                console.log("allpoints: " + this.allpoints[i][0]);
+                //maybe try to build x and y arrays here? this.allpoints[i][0], this.allpoints[i][1]
+                 //return this.allpoints;
+             }
             }
             
         
             print(){
                 //accessing the final items in the array, saving them to a variable to create the grid size
-                this.startingplace = this.allpoints[0];
+                //this.startingplace = this.allpoints[0];
                 let last= this.camino.length-1;
                 let lastitem=(this.camino[last])
                 this.maxwidth = lastitem[0]
@@ -129,8 +130,8 @@ class Turtle {
                     this.xplot.push(this.camino[i][0])
                     this.yplot.push(this.camino[i][1])
                 }   
-                    console.log("to plot x: " + this.xplot)
-                    console.log("to plot y: " + this.yplot)
+                    //console.log("to plot x: " + this.xplot)
+                    //console.log("to plot y: " + this.yplot)
                     // console.log(Math.min(...this.yplot))
                     // console.log(Math.min(...this.xplot))
                     // console.log(Math.max(...this.yplot))
@@ -161,11 +162,11 @@ class Turtle {
 }
      
     
-    const flash = new Turtle(4, 3)
+    const flash = new Turtle(0, 4)
     
 
    
-    flash.forward(3).right().forward(2).print();
+    flash.forward(3).left().forward(3);
     flash.allPoints()
 
 
