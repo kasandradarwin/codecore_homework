@@ -27,37 +27,35 @@ class Turtle {
          //X axis = West <> East
          //Y axis = North <> South
 
-        // currentdirection() {
-        //     return this.direction;
-        //  }
+        currentdirection() {
+            return this.direction;
+         }
 
+    
 
          forward(steps) {
-            //this.direction = this.currentdirection();
-            //console.log("forward: " + steps)
-            for(let z = 0; z == steps; z++) {
-                console.log("helloooooooooo")
-                if (this.direction === "north") {
-                    this.y--
-                    this.allpoints.push([this.x,this.y])
-                    console.log("pushing from forward" + this.allpoints)
+            this.direction = this.currentdirection();
+            this.y = this.y
+            this.x = this.x
+            
+            console.log(steps)
+            //console.log("forward direction: " + this.direction)
+            if(this.direction === "north") {
+                this.y -= steps
+                this.allpoints.push([this.x,this.y])
 
-                } else if (this.direction === "east") {
-                    this.x++
-                    this.allpoints.push([this.x,this.y])
-                    console.log("pushing from forward" + this.allpoints)
+            } else if (this.direction === "east") {
+                this.x += steps
+                this.allpoints.push([this.x,this.y])
 
-                } else if (this.direction === "south") {
-                    this.y++
-                    this.allpoints.push([this.x,this.y])
-                    console.log("pushing from forward" + this.allpoints)
+            } else if (this.direction === "south") {
+                this.y += steps
+                this.allpoints.push([this.x,this.y])
 
-                } else if (this.direction === "west") {
-                    this.x--
-                    this.allpoints.push([this.x,this.y])
-                    console.log("pushing from forward" + this.allpoints)
-                }
-        }
+            } else if (this.direction === "west") {
+                this.x -= steps
+                this.allpoints.push([this.x,this.y])
+            }
             this.camino.push([this.x, this.y])   
 
             return this;
@@ -67,7 +65,7 @@ class Turtle {
         // A turtle should begin facing east.
 
             right() {
-                //this.direction = this.currentdirection();
+                this.direction = this.currentdirection();
             
                 if (this.direction === "north") {
                     this.direction = "east"
@@ -89,7 +87,7 @@ class Turtle {
             // Create a left method like right but turns the turtle's facing to the left.
 
             left() {
-                //this.direction = this.currentdirection();
+                this.direction = this.currentdirection();
 
                 if (this.direction === "north") {
                     this.direction = "west"
@@ -107,7 +105,7 @@ class Turtle {
             }
 
             allPoints(){
-             console.log("allpoints: " + this.allpoints);
+             //console.log("allpoints: " + this.allpoints);
               return this.allpoints;
             }
             
@@ -121,9 +119,8 @@ class Turtle {
                 this.maxheight = lastitem[1]
                 this.xplot =[];
                 this.yplot =[];
-
-                // might not end up needing this, but just building an empty array with the max width
-                this.sizerequired = Array(this.maxwidth);
+       
+                const sizerequired = Array(this.maxwidth);
 
                 for (let i = 0; i < this.camino.length; i++) {
                     this.xplot.push(this.camino[i][0])
@@ -135,24 +132,24 @@ class Turtle {
                     // console.log(Math.min(...this.xplot))
                     // console.log(Math.max(...this.yplot))
                     // console.log(Math.max(...this.xplot))
-            
-                //console.log(sizerequired)
-                //iterating through all points to push empty □ or full boxes ■ to an array
-                for (let j = 0; j < this.allpoints.length; j++) {
-                    const element = this.allpoints[j];
-                    //let remainder = this.maxwidth - element[0]
+                    
+                
 
-                    this.xplot = [[Array(element[0]).fill("■")]]
-                        for (let k = element[0]; k < this.sizerequired.length; k++) {
-                            this.xplot.push("□")
-                            
-                        }
+
+                console.log(sizerequired)
+            
                     
+                
+                // for (let j = 0; j < this.maxheight; j++) {
+                //     let grid = (gridConstructorArr.join(" "))
+                //     console.log(grid)
                     
-                    }
+                // }
+
   
                 console.log("--BEGIN LOG")
-                console.log(this.xplot)
+            
+        
                 console.log("--END LOG")
                
 
@@ -161,11 +158,11 @@ class Turtle {
 }
      
     
-    const flash = new Turtle(4, 3)
+    const flash = new Turtle(0, 0)
     
 
    
-    flash.forward(3).right().forward(2).print();
+    flash.forward(1).right().forward(3).print();
     flash.allPoints()
 
 
@@ -188,3 +185,8 @@ class Turtle {
 
 
             
+
+
+
+
+don't edit this one 
