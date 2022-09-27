@@ -112,84 +112,56 @@ class Turtle {
         } 
         
             print(){
-                
+                let startingPoint = this.allpoints[0];
+                let finalLocation =this.allpoints[this.allpoints.length-1];
+        
                 let path = ""
                
                    
                 console.log("--BEGIN LOG")
-                while (this.allpoints.length>1){
-                for (let i = this.maxY-1;  i >= this.minY; i--){
-                    //console.log("i:",[i])
-                    for (let j = this.minX; j<= this.maxX; j++){
-                        //console.log("j:",[j])
-                        // while (this.allpoints.length>1){
-                           // for (let item in this.allpoints){
-                                //console.log(this.allpoints)
-                            if (this.allpoints[0] === j && this.allpoints=== i){
-                                path += "■"
-                                this.allpoints.pop()
-                                console.log("■", this.allpoints)
-                            } else {
-                                path += "□"
-                                console.log("i:",[i]," j:",[j])
-                                this.allpoints.pop()
-                                console.log("i:",[i]," j:",[j])
-                                console.log("□", this.allpoints)
-                            } //console.log(path)
-                          
-                        } console.log(path)
-                        
-
-                        }//console.log(path)
-                        
-                
+              
             
-                        // if (this.pathTraversed(x,y)){
-                        //     console.log(this.x,this.y)
-                        //     path += "■"
-                        // } else {
-                        //     console.log(this.x,this.y)
-                        //     path += "□"
-                        // }
-                        
-                        
-                    }
-                    console.log("--END LOG")
+                ////// this works to create the grid. save this at all costs.
+                for (let i = 0; i < this.maxX; i++) {
+                for (let j = 0; j < this.maxY; j++) {
+                    path += '□'
                 }
+                path += '\n'
+                }
+
+                console.log(path)
+                ///////////
+
                 
-                // for (let row=0; row < this.allpoints.length; row++){
-                //     //console.log(this.allpoints)
-                //     //console.log("  this.camino[row][cell] X: " + this.camino[row[0]] + " Y: " + this.camino[row][1])
-                //     //let gridX = this.allPoints[row][0]
-                //     //let gridY= this.allPoints[row][1]
-                //     //console.log("gridX: " + gridX + " gridY" + gridY)
-                //     //console.log("grid: " + grid[gridY][gridX])
-
-                // }
-                //console.table("grid: " + grid)
-                
-
-                // might not end up needing this, but just building an empty array with the max width
-               // this.sizerequired = Array(this.maxwidth);
-
-                //     // console.log(Math.min(...this.yplot))
-                //     // console.log(Math.min(...this.xplot))
-                //     // console.log(Math.max(...this.yplot))
-                //     // console.log(Math.max(...this.xplot))
-            
-                // //console.log(sizerequired)
-                // //iterating through all points to push empty □ or full boxes ■ to an array
-                // for (let j = 0; j < this.allpoints.length; j++) {
-                //     const element = this.allpoints[j];
-                //     //let remainder = this.maxwidth - element[0]
-
-                //     this.xplot = [[Array(element[0]).fill("■""□")]]
-                //         for (let k = element[0]; k < this.sizerequired.length; k++) {
-                //             this.xplot.push("□")
-                            
-                //         }                    
-                // }  
+               // while (this.allpoints.length>1){
+                    // console.log("maxY:" , this.maxY, " minY:", this.minY)
+                    // console.log("maxX:" , this.maxX, " minX:", this.minX)
+                // for (let i = this.maxY-1;  i >= this.minY; i--){
+                // //     //console.log("i:",[i])
+                //     for (let j = this.minX; j<= this.maxX; j++){
+                //         //console.log("j:",[j])
+                //         while (this.allpoints.length>1){
+                //            // for (let item in this.allpoints){
+                //                 //console.log(this.allpoints)
+                //             if (this.allpoints[0] === j || this.allpoints[1] === i){
+                //                 path += "■"
+                //                 this.allpoints.shift()
+                //                 console.log("■", this.allpoints)
+                //             } else {
+                //                 path += "□"
+                //                 console.log("i:",[i]," j:",[j])
+                //                 this.allpoints.shift()
+                //                 console.log("i:",[i]," j:",[j]) 
+                //                 //console.log("□", this.allpoints)
+                //            } 
+                //         } console.log(path) 
+                //     }    //console.log(path)            
+                //     } console.log(path) 
+                    console.log("--END LOG")
+               // }
             }
+            
+ }
 
      
     // const flash = new Turtle(0, 4)
@@ -206,7 +178,7 @@ class Turtle {
 
 
 const flash = new Turtle(0, 0)
-    flash.forward(5).right().forward(1).left().forward(6)
+    flash.forward(2).right().forward(3).left().forward(3).right().forward(3)
     .print()
     //.allPoints()
 
