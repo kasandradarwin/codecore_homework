@@ -17,8 +17,9 @@ class Turtle {
         this.allpoints.push([x,y])
         this.direction = "east"
         this.maxX = x;
+        this.minX = x;
         this.maxY = y;
-      
+        this.minY = y;   
     }
 
         //Create a forward method that takes a # of steps then updates the Turtle instance with its new position after moving that many steps.
@@ -26,7 +27,6 @@ class Turtle {
 
          //X axis = West <> East
          //Y axis = North <> South
-
          forward(steps) {
             for(let z = 0; z <=steps; z++) {
             //checks to see what the currect direction is, and moved the turtle forward or backward in the right direction
@@ -46,20 +46,27 @@ class Turtle {
                     this.x--
                     this.allpoints.push([this.x,this.y])
                 }
-            }    
+            }   
+            this.camino.push([this.x, this.y])  
+
             //getting the highest value for the x axis and y axis, will be used to create the grid later
-            this.camino.push([this.x, this.y]) 
+
             if(this.x > this.maxX){
                 this.maxX = this.x
             }  else if (this.y > this.maxY){
                 this.maxY = this.y
             }
 
+            //getting the lowest value for the x axis and y axis, will be used to create the grid later
+
+            if(this.x < this.minX){
+                this.minX = this.x
+            }  else if (this.y < this.minY){
+                this.minY = this.y
+            }
+
             return this;
             } 
-        //Create a right method that takes zero arguments.
-        // When right is called, update the Turtle instance to rotate its facing to the right. 
-        // A turtle should begin facing east.
 
             right() {
             //checks the current direction to turn the turn "right" from the current direction
@@ -81,8 +88,6 @@ class Turtle {
             }
         
 
-            // Create a left method like right but turns the turtle's facing to the left.
-
             left() {
             //checks the current direction, turns the turtle left
 
@@ -102,54 +107,71 @@ class Turtle {
             }
 
             allPoints(){
-            let output = "Maax X: " + this.maxX + "Max Y: " + this.maxY + "\n"
-
-            for (let i = 0; i < this.allpoints.length; i++) {
-                output += "Position " + (i+1) + ": " + this.camino[i] + ", "
-                output += "\n"
-                //console.log("allpoints: " + this.allpoints[i][0]);
-                //maybe try to build x and y arrays here? this.allpoints[i][0], this.allpoints[i][1]
-                 //return this.allpoints;
-                 return output;
-                 }
-            }
-            
+       
+            return(this.allpoints)
+        } 
         
             print(){
-                //accessing the final items in the array, saving them to a variable to create the grid size
                 
-                // this.startingplace = this.allpoints[0];
-                // let last= this.camino.length-1;
-                // let lastitem=(this.camino[last])
-                // this.maxwidth = lastitem[0]
-                // this.maxheight = lastitem[1]
-                // this.xplot =[];
-                // this.yplot =[];
-
-                let grid =  Array(this.maxY).fill(null).map(() => Array(this.maxX).fill('X'))
-                let output = " "
-                
+                let path = ""
+               
+                   
                 console.log("--BEGIN LOG")
-                for (let row=0; row < this.allpoints.length; row++){
-                    console.log("  this.camino[row][cell] X: " + this.camino[row[0]] + " Y: " + this.camino[row][1])
-                    let gridX = this.allPoints[row][0]
-                    let gridY= this.allPoints[row][1]
-                    console.log("gridX: " + gridX + " gridY" + gridY)
-                    //console.log("grid: " + grid[gridY][gridX])
+                while (this.allpoints.length>1){
+                for (let i = this.maxY-1;  i >= this.minY; i--){
+                    //console.log("i:",[i])
+                    for (let j = this.minX; j<= this.maxX; j++){
+                        //console.log("j:",[j])
+                        // while (this.allpoints.length>1){
+                           // for (let item in this.allpoints){
+                                //console.log(this.allpoints)
+                            if (this.allpoints[0] === j && this.allpoints=== i){
+                                path += "■"
+                                this.allpoints.pop()
+                                console.log("■", this.allpoints)
+                            } else {
+                                path += "□"
+                                console.log("i:",[i]," j:",[j])
+                                this.allpoints.pop()
+                                console.log("i:",[i]," j:",[j])
+                                console.log("□", this.allpoints)
+                            } //console.log(path)
+                          
+                        } console.log(path)
+                        
 
+                        }//console.log(path)
+                        
+                
+            
+                        // if (this.pathTraversed(x,y)){
+                        //     console.log(this.x,this.y)
+                        //     path += "■"
+                        // } else {
+                        //     console.log(this.x,this.y)
+                        //     path += "□"
+                        // }
+                        
+                        
+                    }
+                    console.log("--END LOG")
                 }
-                console.table(grid)
-                console.log("--END LOG")
+                
+                // for (let row=0; row < this.allpoints.length; row++){
+                //     //console.log(this.allpoints)
+                //     //console.log("  this.camino[row][cell] X: " + this.camino[row[0]] + " Y: " + this.camino[row][1])
+                //     //let gridX = this.allPoints[row][0]
+                //     //let gridY= this.allPoints[row][1]
+                //     //console.log("gridX: " + gridX + " gridY" + gridY)
+                //     //console.log("grid: " + grid[gridY][gridX])
+
+                // }
+                //console.table("grid: " + grid)
+                
 
                 // might not end up needing this, but just building an empty array with the max width
-                this.sizerequired = Array(this.maxwidth);
+               // this.sizerequired = Array(this.maxwidth);
 
-                // for (let i = 0; i < this.camino.length; i++) {
-                //     this.xplot.push(this.camino[i][0])
-                //     this.yplot.push(this.camino[i][1])
-                // }   
-                //     //console.log("to plot x: " + this.xplot)
-                //     //console.log("to plot y: " + this.yplot)
                 //     // console.log(Math.min(...this.yplot))
                 //     // console.log(Math.min(...this.xplot))
                 //     // console.log(Math.max(...this.yplot))
@@ -168,7 +190,7 @@ class Turtle {
                 //         }                    
                 // }  
             }
-}
+
      
     // const flash = new Turtle(0, 4)
 
@@ -184,14 +206,10 @@ class Turtle {
 
 
 const flash = new Turtle(0, 0)
-    flash.forward(5)
-    .right()
-    .forward(5)
-    .right()
-    .forward(5)
-    .right()
-    .forward(5)
+    flash.forward(5).right().forward(1).left().forward(6)
     .print()
+    //.allPoints()
 
+  
 
             
