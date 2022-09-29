@@ -119,26 +119,54 @@ class Turtle {
                     console.log("--END LOG")
             }
 
+    
+       
+
             
  }
 
-        
-    //const flash = new Turtle(0, 4).forward(3).left().forward(3).print();
-    new Turtle(0, 4)
-    .forward(3)
-    .left()
-    .forward(3)
-    .right()
-    .forward(5)
-    .right()
-    .forward(8)
-    .right()
-    .forward(5)
-    .right()
-    .forward(3)
-    .left()
-    .forward(3)
-    .print();
+ function stretch() {
+    // taking the arguments, splitting them into an array separated by the dashes
+
+    let commands = process.argv.slice(2);
+
+    commands = commands.toString()
+    let commandsArr = commands.split("-")
+    let createnewturtle = ""
+
+    for (let i = 0; i < commandsArr.length; i++) {
+            if (commandsArr[i][0]== "f"){
+                createnewturtle += ".forward(" + commandsArr[i][1] +")"
+            } else if (commandsArr[i][0]== "r") {
+                createnewturtle += ".right()"
+            } else if (commandsArr[i][0]== "l") {
+                createnewturtle += ".left()"
+            } else if (commandsArr[i][0]== "t"){
+                createnewturtle += "new Turtle(" + commandsArr[i][1] + "," + commandsArr[i][3] + ")"
+            } else {
+                console.log("Whoops, try again. Enter something like 't5,5-f10-r-f5-r-f10-r-f5-r-f2-r-f5-l-f2-l-f5'")
+            }
+
+        }
+        createnewturtle += ".print()"
+        return createnewturtle  
+    }
+
+ stretch(process.argv[2])
 
 
-  
+ //t5,5-f10-r-f5-r-f10-r-f5-r-f2-r-f5-l-f2-l-f5
+
+//  pseudocode.. // note, maybe change the order below to the order of frequency.. so F would be first, T would be last, and then right and left doesn't matter
+//  1. take the argument in as an Array. Split by -
+//  Or as an Object.. if key = f, forward(value)
+
+//  for item in array
+//  if array[0]== T, create new turtle (might need to remove the comma or use index of?)
+// else if array[0] ==f{
+//     forward(array[1]) // though this won't capture a 2 digit number like 10
+
+//  }
+
+
+// either try running the function from the if statement.. but if that breaks things, maybe try concetenating to a string and then running it all at the end
