@@ -16,6 +16,7 @@ class Turtle {
          //X axis = West <> East
          //Y axis = North <> South
          forward(steps) {
+          
             for(let z = 0; z <steps; z++) {
             //checks to see what the currect direction is, and moved the turtle forward or backward in the right direction
             //iterates through one by one and pushes to allpoints array each time to track every step 
@@ -113,16 +114,9 @@ class Turtle {
                       }
                       console.log("--BEGIN LOG")
                       console.log(final.join("\n"))
-                    console.log("--END LOG")
+                        console.log("--END LOG")
 
-
-
-            }
-
-           
-       
-
-            
+            }  
  }
 
  function stretch() {
@@ -132,43 +126,25 @@ class Turtle {
     commands = commands.toString()
     let commandsArr = commands.split("-")
 
-    //will use this empty string to add the commands, by concatenating
-    let createnewturtle = ""
 
-    //this iterate through and conver each shorthand command to a function call, eg.f10 will be .forward(10)
-
-    //try switch case
-    let turtle = new Turtle(0,0);
+    //this iterate through and convert each shorthand command to a function call, eg.f10 will be .forward(10)
+    let turtle = new Turtle(0,0); //setting a default value
 
     for (let i = 0; i < commandsArr.length; i++) {
             if (commandsArr[i][0]== "f"){
                 turtle = turtle.forward(commandsArr[i][1])
-                // createnewturtle += ".forward(" + commandsArr[i][1] +")"
             } else if (commandsArr[i][0]== "r") {
                 turtle = turtle.right()
-                // createnewturtle += ".right()"
             } else if (commandsArr[i][0]== "l") {
                 turtle = turtle.left()
-                // createnewturtle += ".left()"
             } else if (commandsArr[i][0]== "t"){
                 turtle = new Turtle(commandsArr[i][1],commandsArr[i][3])
-                // createnewturtle += "new Turtle(" + commandsArr[i][1] + "," + commandsArr[i][3] + ")"
             } else {
-                console.log("Whoops, try again. Enter something like 't5,5-f10-r-f5-r-f10-r-f5-r-f2-r-f5-l-f2-l-f5'")
+                console.log("Whoops, try again. Enter something like 't0,4-f3-l-f3-r-f5-r-f8-r-f5-r-f3-l-f3'")
             }
-            
         } 
-        turtle.allPoints()
         turtle.print()
-
-
-        //appends the print function call to the end to print the grid
-        //createnewturtle += ".print()"
-        // return(createnewturtle)   
     }
-
-
 
 stretch()
 
- //const new Turtle(0,0).forward(1).right()

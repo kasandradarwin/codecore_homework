@@ -1,5 +1,13 @@
 //Codecore Week 2 homework
 
+//Have your script accept an option --output=[filename<]/code> where [filename] corresponds to the name of
+//  a file. If the option is used, write the turtle drawing to the file using fs.writeFile. Notify the user of that the 
+//  write was completed.
+
+
+
+const fs = require('fs');
+
 class Turtle {
     constructor(x,y){
         this.x = x || 0;
@@ -11,14 +19,12 @@ class Turtle {
         //setting the initial values, will be changed and use to set the grid size later.
         this.maxX = x;
         this.maxY = y;
- 
     }
-
-    
 
          //X axis = West <> East
          //Y axis = North <> South
          forward(steps) {
+          
             for(let z = 0; z <steps; z++) {
             //checks to see what the currect direction is, and moved the turtle forward or backward in the right direction
             //iterates through one by one and pushes to allpoints array each time to track every step 
@@ -114,31 +120,74 @@ class Turtle {
                       
                         final.push(x.join(""))
                       }
-                      console.log("--BEGIN LOG")
-                      console.log(final.join("\n"))
-                      console.log("--END LOG")
-            }
+                    //   console.log("--BEGIN LOG")
+                    //   console.log(final.join("\n"))
+                    //  console.log("--END LOG")
 
-            
+                    return final.join("\n")
+
+            }  
  }
 
-        
-    //const flash = new Turtle(0, 4).forward(3).left().forward(3).print();
-    new Turtle(0, 4)
-    .forward(3)
-    .left()
-    .forward(3)
-    .right()
-    .forward(5)
-    .right()
-    .forward(8)
-    .right()
-    .forward(5)
-    .right()
-    .forward(3)
-    .left()
-    .forward(3)
-    .print();
+ function stretch() {
+   // taking the arguments, splitting them into an array separated by the dashes
+
+    let commands = process.argv.slice(3);
+    commands = commands.toString()
+    let commandsArr = commands.split("-")
 
 
-  
+    //this iterate through and convert each shorthand command to a function call, eg.f10 will be .forward(10)
+    let turtle = new Turtle(0,0); //setting a default value
+
+    for (let i = 0; i < commandsArr.length; i++) {
+            if (commandsArr[i][0]== "f"){
+                turtle = turtle.forward(commandsArr[i][1])
+            } else if (commandsArr[i][0]== "r") {
+                turtle = turtle.right()
+            } else if (commandsArr[i][0]== "l") {
+                turtle = turtle.left()
+            } else if (commandsArr[i][0]== "t"){
+                turtle = new Turtle(commandsArr[i][1],commandsArr[i][3])
+            } else {
+                console.log("Whoops, try again. Enter something like 't0,4-f3-l-f3-r-f5-r-f8-r-f5-r-f3-l-f3'")
+            }
+        } 
+     
+        return turtle;
+    }
+//this seemed to fit better outside of a function. Just grabbing the input, and separating the filename from the commands.
+// if --output is included-- call saveToFile function
+
+    let input = process.argv[2];
+    input = input.toString()
+    let inputsplit = input.split("=")
+
+    if (inputsplit =="--output"){
+        saveToFile()
+    }
+
+
+function saveToFile() {
+
+let data = stretch().print();
+let filename = inputsplit[1];
+console.log(filename)
+
+// changed print statement to return
+
+fs.writeFile("drawing.txt", data, (err) => {
+    if (err)
+      console.log(err);
+    else {
+      console.log(`Drawing written to ${filename}`)
+    }
+  })
+
+}
+
+
+//stretch()
+saveToFile()
+
+
