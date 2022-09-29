@@ -11,10 +11,7 @@ class Turtle {
         //setting the initial values, will be changed and use to set the grid size later.
         this.maxX = x;
         this.maxY = y;
- 
     }
-
-    
 
          //X axis = West <> East
          //Y axis = North <> South
@@ -117,23 +114,27 @@ class Turtle {
                       
                       console.log(final.join("\n"))
                     console.log("--END LOG")
+
+
+
             }
 
-    
+           
        
 
             
  }
-
  function stretch() {
     // taking the arguments, splitting them into an array separated by the dashes
 
     let commands = process.argv.slice(2);
-
     commands = commands.toString()
     let commandsArr = commands.split("-")
+
+    //will use this empty string to add the commands, by concatenating
     let createnewturtle = ""
 
+    //this iterate through and conver each shorthand command to a function call, eg.f10 will be .forward(10)
     for (let i = 0; i < commandsArr.length; i++) {
             if (commandsArr[i][0]== "f"){
                 createnewturtle += ".forward(" + commandsArr[i][1] +")"
@@ -148,25 +149,12 @@ class Turtle {
             }
 
         }
+
+        //appends the print function call to the end to print the grid
         createnewturtle += ".print()"
-        return createnewturtle  
+        return createnewturtle   
     }
 
- stretch(process.argv[2])
 
 
- //t5,5-f10-r-f5-r-f10-r-f5-r-f2-r-f5-l-f2-l-f5
-
-//  pseudocode.. // note, maybe change the order below to the order of frequency.. so F would be first, T would be last, and then right and left doesn't matter
-//  1. take the argument in as an Array. Split by -
-//  Or as an Object.. if key = f, forward(value)
-
-//  for item in array
-//  if array[0]== T, create new turtle (might need to remove the comma or use index of?)
-// else if array[0] ==f{
-//     forward(array[1]) // though this won't capture a 2 digit number like 10
-
-//  }
-
-
-// either try running the function from the if statement.. but if that breaks things, maybe try concetenating to a string and then running it all at the end
+ const stretchTurtle = (stretch(process.argv[2]))
