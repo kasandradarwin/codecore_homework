@@ -111,7 +111,7 @@ class Turtle {
                       
                         final.push(x.join(""))
                       }
-                      
+                      console.log("--BEGIN LOG")
                       console.log(final.join("\n"))
                     console.log("--END LOG")
 
@@ -124,6 +124,7 @@ class Turtle {
 
             
  }
+
  function stretch() {
     // taking the arguments, splitting them into an array separated by the dashes
 
@@ -135,26 +136,39 @@ class Turtle {
     let createnewturtle = ""
 
     //this iterate through and conver each shorthand command to a function call, eg.f10 will be .forward(10)
+
+    //try switch case
+    let turtle = new Turtle(0,0);
+
     for (let i = 0; i < commandsArr.length; i++) {
             if (commandsArr[i][0]== "f"){
-                createnewturtle += ".forward(" + commandsArr[i][1] +")"
+                turtle = turtle.forward(commandsArr[i][1])
+                // createnewturtle += ".forward(" + commandsArr[i][1] +")"
             } else if (commandsArr[i][0]== "r") {
-                createnewturtle += ".right()"
+                turtle = turtle.right()
+                // createnewturtle += ".right()"
             } else if (commandsArr[i][0]== "l") {
-                createnewturtle += ".left()"
+                turtle = turtle.left()
+                // createnewturtle += ".left()"
             } else if (commandsArr[i][0]== "t"){
-                createnewturtle += "new Turtle(" + commandsArr[i][1] + "," + commandsArr[i][3] + ")"
+                turtle = new Turtle(commandsArr[i][1],commandsArr[i][3])
+                // createnewturtle += "new Turtle(" + commandsArr[i][1] + "," + commandsArr[i][3] + ")"
             } else {
                 console.log("Whoops, try again. Enter something like 't5,5-f10-r-f5-r-f10-r-f5-r-f2-r-f5-l-f2-l-f5'")
             }
+            
+        } 
+        turtle.allPoints()
+        turtle.print()
 
-        }
 
         //appends the print function call to the end to print the grid
-        createnewturtle += ".print()"
-        return createnewturtle   
+        //createnewturtle += ".print()"
+        // return(createnewturtle)   
     }
 
 
 
- const stretchTurtle = (stretch(process.argv[2]))
+stretch()
+
+ //const new Turtle(0,0).forward(1).right()
