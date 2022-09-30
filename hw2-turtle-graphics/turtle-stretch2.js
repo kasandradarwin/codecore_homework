@@ -4,6 +4,8 @@
 //  a file. If the option is used, write the turtle drawing to the file using fs.writeFile. Notify the user of that the 
 //  write was completed.
 
+//node turtle-stretch2.js --output=drawing.txt f10-r-r-f10-l-f5-l-f10-r-f5-r-f11
+
 
 
 const fs = require('fs');
@@ -113,6 +115,8 @@ class Turtle {
                 
                 final.push(x.join(""))
                 }
+                //changed this to return from the last assignment-- because I don't want it to print to the console, 
+                //I want it to print to a new file so this will take place in the savetofile() function
                 return final.join("\n")
         }  
  }
@@ -162,7 +166,8 @@ console.log(filename)
 
 // changed print statement to return
 
-fs.writeFile("drawing.txt", data, (err) => {
+//fs.writeFile("drawing.txt", data, (err) => {
+fs.writeFile(filename, data, (err) => {
     if (err)
       console.log(err);
     else {

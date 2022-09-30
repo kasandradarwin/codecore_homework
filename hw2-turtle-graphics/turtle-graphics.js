@@ -93,7 +93,7 @@ class Turtle {
             const final = [];
             const slicedpoints = this.allpoints;
 
-            for (let i=0 ; i<this.maxX+2; i++){         //iterates through the widtn of the grid            
+            for (let i=0 ; i<this.maxX+2; i++){         //iterates through the width of the grid            
                 const x = []
                 for(let j=0; j<this.maxY+2; j++){  //iterates through the length of the grid
                     const gridPath = slicedpoints.find((item)=>{
