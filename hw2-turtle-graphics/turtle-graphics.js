@@ -1,4 +1,4 @@
-//Codecore Week 2 homework
+//Codecore Week 2 homework without the stretches
 
 class Turtle {
     constructor(x,y){
@@ -9,8 +9,13 @@ class Turtle {
         this.direction = "east"
 
         //setting the initial values, will be changed and use to set the grid size later.
-        this.maxX = x;
-        this.maxY = y;
+        this.maxX = this.x;
+        this.maxY = this.y;
+
+        //this.minX = this.x;
+       // this.minY = this.y;
+
+        
  
     }
 
@@ -20,24 +25,38 @@ class Turtle {
          //Y axis = North <> South
          forward(steps) {
             for(let z = 0; z <steps; z++) {
+
             //checks to see what the currect direction is, and moved the turtle forward or backward in the right direction
             //iterates through one by one and pushes to allpoints array each time to track every step 
                 if (this.direction === "north") {
                     this.y--
+                    // if (this.y < 0){
+                    //     this.y = 0;
+                    // }
                     this.allpoints.push([this.x,this.y])
 
                 } else if (this.direction === "east") {
                     this.x++
+                    // if (this.x < 0){
+                    //     this.x = 0;
+                    // }
                     this.allpoints.push([this.x,this.y])
 
                 } else if (this.direction === "south") {
                     this.y++
+                    // if (this.y < 0){
+                    //     this.y = 0;
+                    // }
                     this.allpoints.push([this.x,this.y])
 
                 } else if (this.direction === "west") {
                     this.x--
+                    // if (this.x < 0){
+                    //     this.x = 0;
+                    // }
                     this.allpoints.push([this.x,this.y])
                 }
+
             }   
 
             //getting the highest value for the x axis and y axis, will be used to create the grid later
@@ -46,6 +65,12 @@ class Turtle {
                 this.maxX = this.x 
             }  else if (this.y > this.maxY){
                 this.maxY = this.y
+            }
+
+            if(this.x < this.minX){
+                this.minX = this.x 
+            }  else if (this.y > this.minY){
+                this.minY = this.y
             }
 
             //getting the lowest value for the x axis and y axis, will be used to create the grid later
@@ -96,13 +121,32 @@ class Turtle {
         } 
         
             print(){
-                //let startingPoint = this.allpoints[0];
-                //let finalLocation =this.allpoints[this.allpoints.length-1];
                 
+                let startingPointX = this.allpoints[0][1];
+                let startingPointY = this.allpoints[0][1];
+                let finalPointX = this.allpoints[this.allpoints.length-1][0]
+                let finalPointY = this.allpoints[this.allpoints.length-1][1]
+                let xstart = this.minX;
+  
+                console.log(this.maxX, this.maxY)
+                console.log(this.allpoints)
+
                     const final = [];
                     const slicedpoints = this.allpoints
                     
+                    // if (startingPointX < finalPointX){
+                    //     this.maxX = this.maxX + startingPointX
+                    //     console.log(this.maxX, this.maxY)
+                      
+                    // }
+                    // if (startingPointY < finalPointY){
+                    //     this.maxY = this.maxY + startingPointY
+                    //     console.log(this.maxX, this.maxY)
+                      
+                    // }
                     for (let i=0 ; i<this.maxX+2; i++){
+                        console.log(this.minX, this.minY)
+                    
                         const x = []
                         for(let j=0; j<this.maxY+2; j++){
                           const gridPath = slicedpoints.find((item)=>{
@@ -123,7 +167,10 @@ class Turtle {
  }
 
         
-    //const flash = new Turtle(0, 4).forward(3).left().forward(3).print();
+    const flash = new Turtle(0, 4).forward(3).left().forward(3).print();
+    //const flash = new Turtle(0, 0).forward(3).left().forward(3);
+//flash.print();
+
     new Turtle(0, 4)
     .forward(3)
     .left()
@@ -139,6 +186,17 @@ class Turtle {
     .left()
     .forward(3)
     .print();
+
+     new Turtle(0, 0)
+    .forward(5)
+    .right()
+    .forward(5)
+    .right()
+    .forward(5)
+    .right()
+    .forward(5)
+    .print()
+
 
 
   

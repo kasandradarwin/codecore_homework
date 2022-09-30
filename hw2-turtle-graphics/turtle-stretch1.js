@@ -69,7 +69,6 @@ class Turtle {
                 return this;
 
             }
-        
 
             left() {
             //checks the current direction, turns the turtle left

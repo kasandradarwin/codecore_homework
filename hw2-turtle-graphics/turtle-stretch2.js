@@ -148,7 +148,7 @@ class Turtle {
             } else if (commandsArr[i][0]== "l") {
                 turtle = turtle.left()
             } else if (commandsArr[i][0]== "t"){
-                turtle = new Turtle(commandsArr[i][1],commandsArr[i][3])
+                turtle = new Turtle(commandsArr[i][1],",",commandsArr[i][3])
             } else {
                 console.log("Whoops, try again. Enter something like 't0,4-f3-l-f3-r-f5-r-f8-r-f5-r-f3-l-f3'")
             }
