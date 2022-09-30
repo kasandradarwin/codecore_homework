@@ -11,15 +11,8 @@ class Turtle {
         //setting the initial values, will be changed and use to set the grid size later.
         this.maxX = this.x;
         this.maxY = this.y;
-
-        //this.minX = this.x;
-       // this.minY = this.y;
-
-        
  
     }
-
-    
 
          //X axis = West <> East
          //Y axis = North <> South
@@ -30,30 +23,18 @@ class Turtle {
             //iterates through one by one and pushes to allpoints array each time to track every step 
                 if (this.direction === "north") {
                     this.y--
-                    // if (this.y < 0){
-                    //     this.y = 0;
-                    // }
                     this.allpoints.push([this.x,this.y])
 
                 } else if (this.direction === "east") {
                     this.x++
-                    // if (this.x < 0){
-                    //     this.x = 0;
-                    // }
                     this.allpoints.push([this.x,this.y])
 
                 } else if (this.direction === "south") {
                     this.y++
-                    // if (this.y < 0){
-                    //     this.y = 0;
-                    // }
                     this.allpoints.push([this.x,this.y])
 
                 } else if (this.direction === "west") {
                     this.x--
-                    // if (this.x < 0){
-                    //     this.x = 0;
-                    // }
                     this.allpoints.push([this.x,this.y])
                 }
 
@@ -92,9 +73,7 @@ class Turtle {
                 } else if (this.direction === "west") {
                     this.direction = "north"
                 }
-                
                 return this;
-
             }
         
 
@@ -122,17 +101,17 @@ class Turtle {
         
             print(){
                 
-                let startingPointX = this.allpoints[0][1];
-                let startingPointY = this.allpoints[0][1];
-                let finalPointX = this.allpoints[this.allpoints.length-1][0]
-                let finalPointY = this.allpoints[this.allpoints.length-1][1]
-                let xstart = this.minX;
+                // let startingPointX = this.allpoints[0][1];
+                // let startingPointY = this.allpoints[0][1];
+                // let finalPointX = this.allpoints[this.allpoints.length-1][0]
+                // let finalPointY = this.allpoints[this.allpoints.length-1][1]
+                // let xstart = this.minX;
   
                 console.log(this.maxX, this.maxY)
                 console.log(this.allpoints)
 
                     const final = [];
-                    const slicedpoints = this.allpoints
+                    const slicedpoints = this.allpoints;
                     
                     // if (startingPointX < finalPointX){
                     //     this.maxX = this.maxX + startingPointX
@@ -144,9 +123,7 @@ class Turtle {
                     //     console.log(this.maxX, this.maxY)
                       
                     // }
-                    for (let i=0 ; i<this.maxX+2; i++){
-                        console.log(this.minX, this.minY)
-                    
+                    for (let i=0 ; i<this.maxX+2; i++){                    
                         const x = []
                         for(let j=0; j<this.maxY+2; j++){
                           const gridPath = slicedpoints.find((item)=>{
@@ -158,20 +135,16 @@ class Turtle {
                       
                         final.push(x.join(""))
                       }
+                      
                       console.log("--BEGIN LOG")
                       console.log(final.join("\n"))
                       console.log("--END LOG")
             }
 
-            
  }
 
         
-    const flash = new Turtle(0, 4).forward(3).left().forward(3).print();
-    //const flash = new Turtle(0, 0).forward(3).left().forward(3);
-//flash.print();
-
-    new Turtle(0, 4)
+ new Turtle(0, 4)
     .forward(3)
     .left()
     .forward(3)
@@ -186,17 +159,3 @@ class Turtle {
     .left()
     .forward(3)
     .print();
-
-     new Turtle(0, 0)
-    .forward(5)
-    .right()
-    .forward(5)
-    .right()
-    .forward(5)
-    .right()
-    .forward(5)
-    .print()
-
-
-
-  
