@@ -122,23 +122,21 @@ class Turtle {
 
     //this iterate through and convert each shorthand command to a function call, eg.f10 will be .forward(10)
     let turtle = new Turtle(0,0); //setting a default value
-    
-    console.log(this.maxX, this.maxY)
 
     for (let i = 0; i < commandsArr.length; i++) {
-            if (commandsArr[i][0]== "f"){
-                turtle = turtle.forward(commandsArr[i].slice(1))
-            } else if (commandsArr[i][0]== "r") {
-                turtle = turtle.right()
-            } else if (commandsArr[i][0]== "l") {
-                turtle = turtle.left()
-            } else if (commandsArr[i][0]== "t"){
-                turtle = new Turtle(commandsArr[i][1],commandsArr[i][3])
-            } else {
-                console.log("Whoops, try again. Enter something like 't0,4-f3-l-f3-r-f5-r-f8-r-f5-r-f3-l-f3'")
-            }
+        if (commandsArr[i][0]== "f"){
+            turtle = turtle.forward(commandsArr[i].slice(1))
+        } else if (commandsArr[i][0]== "r") {
+            turtle = turtle.right()
+        } else if (commandsArr[i][0]== "l") {
+            turtle = turtle.left()
+        } else if (commandsArr[i][0]== "t"){
+            turtle = new Turtle(commandsArr[i][1],commandsArr[i][3])
+        } else {
+            console.log("Whoops, try again. Enter something like 't0,4-f3-l-f3-r-f5-r-f8-r-f5-r-f3-l-f3'")
+        }
             
-        } 
+    } 
         console.log(turtle.allPoints())
         
         turtle.print()
