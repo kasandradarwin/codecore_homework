@@ -1,5 +1,10 @@
 //Codecore Week 2 homework
 
+//node turtle-stretch1.js  f10-r-r-f10-l-f5-l-f10-r-f5-r-f11
+
+// node turtle-stretch1.js  t0,4-f3-l-f3-r-f5-r-f8-r-f5-r-f3-l-f3
+
+
 class Turtle {
     constructor(x,y){
         this.x = x || 0;
@@ -135,9 +140,7 @@ class Turtle {
         } else {
             console.log("Whoops, try again. Enter something like 't0,4-f3-l-f3-r-f5-r-f8-r-f5-r-f3-l-f3'")
         }
-            
     } 
-        console.log(turtle.allPoints())
         
         turtle.print()
     }

@@ -130,17 +130,7 @@ new Turtle(0, 4)
     .forward(3)
     .print();
 
-new Turtle(0, 0)
-.forward(5)
-.right()
-.forward(5)
-.right()
-.forward(5)
-.right()
-.forward(5)
-.print()
 
-const flash = new Turtle(0, 4).forward(3).left().forward(3).print();
 
 
 
