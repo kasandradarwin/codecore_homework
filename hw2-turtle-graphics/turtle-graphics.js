@@ -114,7 +114,7 @@ class Turtle {
  }
 
         
- const Juanita = new Turtle(0, 4)
+new Turtle(0, 4)
     .forward(3)
     .left()
     .forward(3)
@@ -130,15 +130,15 @@ class Turtle {
     .forward(3)
     .print();
 
-const raphael = new Turtle(0, 0)
-.forward(5)
-.right()
-.forward(5)
-.right()
-.forward(5)
-.right()
-.forward(5)
-.print()
+// new Turtle(0, 0)
+// .forward(5)
+// .right()
+// .forward(5)
+// .right()
+// .forward(5)
+// .right()
+// .forward(5)
+// .print()
 
-const flash = new Turtle(0, 4).forward(3).left().forward(3).print();
+// const flash = new Turtle(0, 4).forward(3).left().forward(3).print();
 
