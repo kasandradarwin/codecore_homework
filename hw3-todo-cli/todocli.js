@@ -1,40 +1,5 @@
 const readline = require("readline")
-let tasks = [];
-
-function viewItem(){
-    console.log("viewitem")
-    //From the Todo Menu, pressing v then Enter should display the contents of the todo
-    // list then the Todo Menu again. 
-    //When displaying the list, completed items should have a checkmark (i.e. `✓`) besides their title. For example:
-
-// should probably be an array
-    }
-
-function newItem(){
-    console.log("newitem")
-    // push an item to the tasks item
-
-//From the Todo Menu pressing n then Enter should ask the user what item to add to the list. 
-//The user can then write a response. Save their response as a new item at the end of the todo list.
-    }
-
-function completeItems(){
-    console.log("completeitems")
-    //From the Todo Menu pressing cX where X refers to the index of a Todo item then Enter should mark that item as complete. 
-    //Tell the user which item was marked. Then, re-display the Todo Menu
-    }
-
-function deleteItem(){
-    console.log("deleteitem")
-    // /From the Todo Menu pressing dX where X refers to the index of a Todo item then `Enter` 
-    //should remove that from the list. Tell the user which item was deleted. Then, re-display the Todo Menu.
-    }
-
-function quit(){
-    //From the Todo Menu pressing q quits the application. Say farewell.
-    console.log("Finished already? Great work! See you soon😃")
-    rl.close()
-    }
+const tasks = [];
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -43,12 +8,92 @@ const rl = readline.createInterface({
     })
 
 
-    //on() -- first arg should be the name of the event as a string, second arg-- the listener callback function
-function readCommand(){
-rl.on("Welcome to TODO CLI! \n \n ---------------------------- \n \n (v) View * (n) New * (cX) Complete * (dX) Delete * (q) Quit"), (command) => {
-    r1.prompt()
+let command = process.argv[2][0];
+switch (command){
+    case 'v':
+        viewItem() 
+        break;
+    case 'c':
+        completeItems(process.argv[2][1]) // might have to turn this into slice later, in case we get to double digits
+        break;
+    case 'n':
+        newItem()
+        break;
+    case 'd':
+        deleteItem(process.argv[2][1]) // might have to turn this into slice later, in case we get to double digits
+        break;
+    case 'q':
+        quit() 
+        break;
+    default:
+        console.log("Did ya wanna try that again? \n \n(v) View * (n) New * (cX) Complete * (dX) Delete * (q) Quit")
+        //r1.prompt()
+}
+    
 
-console.log(input)
+
+function viewItem(){
+    console.log(tasks)
+    rl.prompt()
+    //From the Todo Menu, pressing v then Enter should display the contents of the todo
+    // list then the Todo Menu again. 
+    //When displaying the list, completed items should have a checkmark (i.e. `✓`) besides their title. For example:
+    }
+
+function newItem(){
+    rl.question("What new item would you like to add to the list? \n", (newitem) => {
+        console.log(tasks)
+
+        tasks.push(["☐",newitem])
+        console.log(`'${newitem}' has been added to your to-do list`)
+        console.log(tasks)
+        rl.close()
+        })
+    
+    }
+
+//From the Todo Menu pressing n then Enter should ask the user what item to add to the list. 
+//The user can then write a response. Save their response as a new item at the end of the todo list.
+    
+
+function completeItems(checkOff){
+    //☑
+    console.log("completeitems", checkOff)
+    //From the Todo Menu pressing cX where X refers to the index of a Todo item then Enter should mark that item as complete. 
+    //Tell the user which item was marked. Then, re-display the Todo Menu
+    }
+
+function deleteItem(toDelete){
+    console.log("deleteitem", process.argv[2][1])
+    // /From the Todo Menu pressing dX where X refers to the index of a Todo item then `Enter` 
+    //should remove that from the list. Tell the user which item was deleted. Then, re-display the Todo Menu.
+    viewItem()
+    }
+
+function quit(){
+    //From the Todo Menu pressing q quits the application. Say farewell.
+    console.log("Finished already? Great work! See you soon😃")
+    rl.close()
+    }
+
+console.log(tasks)
+
+    //on() -- first arg should be the name of the event as a string, second arg-- the listener callback function
+    
+// rl.on("line", (command) => {
+//     console.log("Welcome to TODO CLI! \n \n ---------------------------- \n \n (v) View * (n) New * (cX) Complete * (dX) Delete * (q) Quit")
+
+//     if (command == 'v'){
+//         console.log("Nope! Try again")
+//         attempts++
+//         rl.prompt()
+    
+        
+//     } else if (command == 'q'){ {
+//         console.log(`Guessed ${guess} correctly in ${attempts} attempts!`)
+//         rl.close()
+//     }
+// })
 
 // function readCommand(){
 //     let input = process.argv[2][0];
@@ -63,28 +108,30 @@ console.log(input)
 // }
 
 
-switch (input){
-    case 'v':
-        console.log("view") // change to a function call when functions are set up
-        break;
-    case 'c':
-        console.log("complete") // change to a function call when functions are set up, add processargv[2][1] as argument?
-        break;
-    case 'n':
-        console.log("new") // change to a function call when functions are set up
-        break;
-    case 'd':
-        console.log("delete") // change to a function call when functions are set up, add processargv[2][1] as argument?
-        break;
-    case 'q':
-        console.log("quit") // change to a function call when functions are set up
-        break;
-    default:
-        console.log("Did ya wanna try that again? \n \n(v) View * (n) New * (cX) Complete * (dX) Delete * (q) Quit")
-        r1.prompt()
-}
+
+let input = process.argv[2][0];
+// switch (input){
+//     case 'v':
+//         console.log("view") // change to a function call when functions are set up
+//         break;
+//     case 'c':
+//         console.log("complete") // change to a function call when functions are set up, add processargv[2][1] as argument?
+//         break;
+//     case 'n':
+//         console.log("new") // change to a function call when functions are set up
+//         break;
+//     case 'd':
+//         console.log("delete") // change to a function call when functions are set up, add processargv[2][1] as argument?
+//         break;
+//     case 'q':
+//         console.log("quit") // change to a function call when functions are set up
+//         break;
+//     default:
+//         console.log("Did ya wanna try that again? \n \n(v) View * (n) New * (cX) Complete * (dX) Delete * (q) Quit")
+//         r1.prompt()
+// }
     
-}
+
    
   
 
@@ -127,8 +174,6 @@ switch (input){
 
 //     //this iterate through and convert each shorthand command to a function call, eg.f10 will be .forward(10)
 //     let turtle = new Turtle(0,0); //setting a default value
-
-readCommand()
 
 
 
