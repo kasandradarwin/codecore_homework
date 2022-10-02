@@ -1,14 +1,17 @@
 const readline = require("readline")
-const tasks = [];
+let tasks = [['☐','make breakfast'], ['☐','strip the spare bed']];
+
+//console.log("Welcome to Todo CLI \n \n  -------------------- \n \n  (v) View * (n) New * (cX) Complete * (dX) Delete * (q) Quit")
 
 const rl = readline.createInterface({
     input: process.stdin,
     output:  process.stdout,
-    prompt: "(v) View * (n) New * (cX) Complete * (dX) Delete * (q) Quit \n \n >" 
+    prompt: "\n (v) View * (n) New * (cX) Complete * (dX) Delete * (q) Quit \n \n >" 
     })
 
 
 let command = process.argv[2][0];
+
 switch (command){
     case 'v':
         viewItem() 
@@ -30,10 +33,10 @@ switch (command){
         //r1.prompt()
 }
     
-
-
 function viewItem(){
-    console.log(tasks)
+    for (let i = 0; i < tasks.length; i++) {
+        console.log(tasks[i].join(" "))  
+    }
     rl.prompt()
     //From the Todo Menu, pressing v then Enter should display the contents of the todo
     // list then the Todo Menu again. 
@@ -42,14 +45,13 @@ function viewItem(){
 
 function newItem(){
     rl.question("What new item would you like to add to the list? \n", (newitem) => {
-        console.log(tasks)
+        //viewItem()
 
         tasks.push(["☐",newitem])
         console.log(`'${newitem}' has been added to your to-do list`)
-        console.log(tasks)
+        viewItem()
         rl.close()
-        })
-    
+        })  
     }
 
 //From the Todo Menu pressing n then Enter should ask the user what item to add to the list. 
@@ -58,7 +60,19 @@ function newItem(){
 
 function completeItems(checkOff){
     //☑
-    console.log("completeitems", checkOff)
+    console.log(`Marking: '${tasks[checkOff][1]}' complete...\n`)
+    tasks[checkOff][0] = "☑"
+
+    //setting the timeout just because I think it looks a bit more polished
+
+    setTimeout(function() {
+        console.log("Success! Here is your updated list: \n")
+        viewItem()
+    }, 1500);
+
+
+  
+  
     //From the Todo Menu pressing cX where X refers to the index of a Todo item then Enter should mark that item as complete. 
     //Tell the user which item was marked. Then, re-display the Todo Menu
     }
@@ -76,7 +90,7 @@ function quit(){
     rl.close()
     }
 
-console.log(tasks)
+//console.log(tasks)
 
     //on() -- first arg should be the name of the event as a string, second arg-- the listener callback function
     
@@ -164,17 +178,4 @@ let input = process.argv[2][0];
 
 
 
-// function stretch() {
-//     // taking the arguments, splitting them into an array separated by the dashes
-
-//     let commands = process.argv.slice(2);
-//     commands = commands.toString()
-//     let commandsArr = commands.split("-")
-
-
-//     //this iterate through and convert each shorthand command to a function call, eg.f10 will be .forward(10)
-//     let turtle = new Turtle(0,0); //setting a default value
-
-
-
-
+// stretch: https://nodejs.org/docs/latest-v15.x/api/readline.html#readline_example_read_file_stream_line_by_line
