@@ -1,5 +1,5 @@
 const readline = require("readline")
-const tasks = [['[]','make breakfast'],];
+const tasks = [['[ ]','make breakfast'],['[ ]','make breakfast'],['[ ]','make breakfast'],['[ ]','make breakfast']];
 
 
 
@@ -11,7 +11,12 @@ const rl = readline.createInterface({
 
 function welcome(){
     console.log("Welcome to Todo CLI \n \n  -------------------- \n \n  (v) View * (n) New * (cX) Complete * (dX) Delete * (q) Quit")
-    rl.prompt()
+    //rl.prompt()
+
+}
+
+function commandList(){
+    console.log(" \n  (v) View * (n) New * (cX) Complete * (dX) Delete * (q) Quit")
 
 }
 
@@ -29,7 +34,7 @@ rl.on('line', (command) => {
             newItem()
             break;
         case 'd':
-            deleteItem(command[1].slice(1)) // might have to turn this into slice later, in case we get to double digits
+            deleteItem(command.slice(1)) // might have to turn this into slice later, in case we get to double digits
             break;
         case 'q':
             quit() 
@@ -42,11 +47,15 @@ rl.on('line', (command) => {
 
     
 function viewItem(){
+    setTimeout(function() {
+    
+    console.log("📝 To Do List")
     for (let i = 0; i < tasks.length; i++) {
         console.log(tasks[i].join(" "))  
     }
-   
-rl.prompt()
+}, 500);
+
+//rl.prompt()
 
     //From the Todo Menu, pressing v then Enter should display the contents of the todo
     // list then the Todo Menu again. 
@@ -57,13 +66,16 @@ function newItem(){
     rl.question("What new item would you like to add to the list? \n", (newitem) => {
         //viewItem()
 
-        tasks.push(["☐",newitem])
+        tasks.push(["[ ]",newitem])
         setTimeout(function() {
-            console.log(`✅${newitem} has been added to your to-do list`)
-        }, 900);
+            console.log(`✅${newitem} has been added to your to-do list\n \n`)
+            viewItem()
+            
+        }, 500);
        
 
         })  
+    commandList()
     }
 
 //From the Todo Menu pressing n then Enter should ask the user what item to add to the list. 
@@ -78,12 +90,13 @@ function completeItems(checkOff){
     //setting the timeout just because I think it looks a bit more polished
 
     setTimeout(function() {
-        console.log("✅ Success! Here is your updated list: \n")
-    }, 900);
+        console.log("✅ Success! Here is your updated list: \n \n")
+        viewItem()
+    }, 500);
 
     setTimeout(function() {
-        viewItem()
-    }, 1800);
+        commandList()
+    }, 1200);
 
 
   
@@ -97,20 +110,19 @@ function deleteItem(toDelete){
     //should remove that from the list. Tell the user which item was deleted. Then, re-display the Todo Menu.
 
 
-    console.log(`Deleting: '${tasks[toDelete]}' from your list...\n`)
-
+    console.log(`Deleting: '${tasks[toDelete][1]}' from your list...\n`)
+   
     tasks.splice([toDelete],1)   
 
     //setting the timeout just because I think it looks a bit nicer
 
     setTimeout(function() {
-        console.log("✅ Successfully removed! Here is your updated list: \n")
-    }, 900);
-    
-
-    setTimeout(function() {
+        console.log("✅ Successfully removed! Here is your updated list: \n \n")
         viewItem()
-    }, 1800);
+    
+        commandList()
+    }, 500);
+
 }
 
 function quit(){
