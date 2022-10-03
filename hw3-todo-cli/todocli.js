@@ -1,5 +1,5 @@
 const readline = require("readline")
-const tasks = [['[ ]','make breakfast'],['[ ]','make breakfast'],['[ ]','make breakfast'],['[ ]','make breakfast']];
+const tasks = []//[['[ ]','make breakfast'],['[ ]','make breakfast'],['[ ]','make breakfast'],['[ ]','make breakfast']];
 
 
 
@@ -47,13 +47,20 @@ rl.on('line', (command) => {
 
     
 function viewItem(){
-    setTimeout(function() {
-    
-    console.log("📝 To Do List")
-    for (let i = 0; i < tasks.length; i++) {
-        console.log(tasks[i].join(" "))  
+    if (tasks.length > 0){
+        setTimeout(function() {
+        console.log("📝 To Do List")
+        for (let i = 0; i < tasks.length; i++) {
+            console.log(tasks[i].join(" "))  
+        }
+        }, 500)
+        commandList()
+    } else {
+        console.log("Your To Do list is empty, you can add an item but pressing 'n'")
+
     }
-}, 500);
+
+
 
 //rl.prompt()
 
@@ -75,15 +82,17 @@ function newItem(){
        
 
         })  
-    commandList()
     }
 
 //From the Todo Menu pressing n then Enter should ask the user what item to add to the list. 
 //The user can then write a response. Save their response as a new item at the end of the todo list.
-    
-
+   
 function completeItems(checkOff){
-    
+    if (tasks.length == 0){
+        console.log("Your To Do list is empty, you can add an item but pressing 'n'")
+    } else {
+
+    try{
     console.log(`Marking: '${tasks[checkOff][1]}' complete...\n`)
     tasks[checkOff][0] = "[✓]"
 
@@ -94,15 +103,24 @@ function completeItems(checkOff){
         viewItem()
     }, 500);
 
-    setTimeout(function() {
-        commandList()
-    }, 1200);
+   
+    } catch(err) {
+        console.log("whoops, that index doesn't correspond with an item in the list-- try one of these!")
+        console.table(tasks)
+    }
+}
+    
 
 
   
     //From the Todo Menu pressing cX where X refers to the index of a Todo item then Enter should mark that item as complete. 
     //Tell the user which item was marked. Then, re-display the Todo Menu
     }
+
+  
+//     //From the Todo Menu pressing cX where X refers to the index of a Todo item then Enter should mark that item as complete. 
+//     //Tell the user which item was marked. Then, re-display the Todo Menu
+//     }
 
 function deleteItem(toDelete){
 
@@ -120,7 +138,6 @@ function deleteItem(toDelete){
         console.log("✅ Successfully removed! Here is your updated list: \n \n")
         viewItem()
     
-        commandList()
     }, 500);
 
 }
