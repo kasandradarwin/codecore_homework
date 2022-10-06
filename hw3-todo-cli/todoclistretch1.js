@@ -1,17 +1,10 @@
-const readline = require("readline")
+const readline = require("readline");
 const fs = require("fs");
-//const path = "./marked.csv"
+const { resourceLimits } = require("worker_threads");
+const path = process.argv.slice(2);
+const tasks = [] //[['[ ]','make breakfast'],['[ ]','make breakfast'],['[ ]','make breakfast'],['[ ]','make breakfast']];
 //let stringDelete = ""
-if (process.argv[2]){
-fs.readFile(path, "utf8", (err, data) =>{
-    if (err) {
-        console.log(err);
-     } else {
-        console.log(process.argv[2])
 
-     }
-    }
-}
     
 
 const rl = readline.createInterface({
@@ -149,7 +142,49 @@ function quit(){
     //From the Todo Menu pressing q quits the application. Say farewell.
     console.log("Finished already? Great work! See you soon😃")
     rl.close()
+
     }
+
+    if (path){
+        fs.readFile('./myTodos.json', "utf8", (err, path) =>{
+            // fetch('./myTodos.json')
+            // .then results=> resourceLimits.json())
+            // .then(console.log)
+
+            if (err) {
+                console.log(err);
+             } else {
+
+                if (tasks.length >0){
+                    JSON.stringify(tasks)
+                }
+                // const parseddata = JSON.parse(path, (key, value))
+                // console.log(parseddata.completed, parseddata.title);
+        
+                JSON.parse(path, (key, value) => {
+                    //console.log(key,":",value)
+                    for (key in value){
+                        console.log(value.title)
+                        console.log(value.title)
+                            //console.log(key)
+                           // console.log(value[1])
+                           // console.log(key[1])
+                        if (value[0] == false){
+                            //tasks.push("[ ]",value[0])
+                            //console.log("[ ]",value[0])
+                        } else if (value[0] == true){
+                            //tasks.push(["[✓]",item[0]])
+                            //console.log("[✓]",title[0])
+                    } 
+                    //console.log(key,":",value); // log the current property name, the last is "".
+                    //return value; // return the unchanged property value.
+         }
+        } 
+        )}
+    })
+}
+            
+        
 
 welcome()
 
