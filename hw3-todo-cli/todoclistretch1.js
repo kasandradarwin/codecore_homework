@@ -161,24 +161,27 @@ function quit(){
       }
      
 function saveToDo() {
-    filetasks = tasks.toString()
+    //filetasks = tasks.toString()
     filename ='toDoList.json'
     rl.question("What would you like to name your file? \n", (filename) => {
-        const jsonobj = JSON.stringify(tasks)
+        //const jsonobj = {};
+        const jsonString = JSON.stringify(Object.assign({}, tasks))
+        console.log(jsonString)
         // for (let i = 0; i < tasks.length; i++) {
         //     if (tasks[i][0] == '[ ]'){
+        //         console.log("in the if")
         //         jsonobj['completed' + 'false']
+        //         console.log("in the else if")
         //     } else if(tasks[i][0] == '[✓]'){
         //         jsonobj['completed' + 'true']
         //     }
         //     jsonobj['title' + tasks[i][0] ]
-            
         // }
 
         // if (filename == undefined){
         //     filename = 'toDoList.json'
         // }
-        fs.writeFile(filename, filetasks, err =>{
+        fs.writeFile(filename, jsonString, err =>{
             if (err) {
                 console.log(err);
             } else {
