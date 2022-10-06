@@ -18,7 +18,7 @@ function welcome(){
 }
 
 function commandList(){
-    console.log(" \n (v) View * (n) New * (cX) Complete * (dX) Delete * (q) Quit \n \n")
+    console.log(" \n (v) View * (n) New * (cX) Complete * (dX) Delete * (s) Save * (q) Quit \n \n")
 }
 
 
@@ -44,6 +44,10 @@ rl.on('line', (command) => {
             console.log("\n \n 👉 Quit 👈\n \n ")
             quit() 
             break;
+        case 's':
+            console.log("\n \n 👉 Save List 👈\n \n ")
+            saveToDo()
+            break;
         default:
             console.log("Hmm... that didn't work. Did ya wanna try that again? \n \n(v) View * (n) New * (cX) Complete * (dX) Delete * (q) Quit")
             //r1.prompt()
@@ -63,13 +67,15 @@ function viewItem(){
         }, 500)
         } else {
         console.log("Your To Do list is empty, you can add an item but pressing 'n'")
-
     }
 
-    //From the Todo Menu, pressing v then Enter should display the contents of the todo
-    // list then the Todo Menu again. 
-    //When displaying the list, completed items should have a checkmark (i.e. `[✓]`) besides their title.
-    }
+    // for (let i = 0; i < tasks.length; i++) {
+    //     console.log(tasks[i])
+    //     console.log(tasks[i][0])
+    //     console.log(tasks[i][1])
+        
+    // }
+}
 
 function newItem(){
     rl.question("What new item would you like to add to the list? \n", (newitem) => {
@@ -105,10 +111,10 @@ function completeItems(checkOff){
         } catch(err) {
             console.log(`🥹 Whoops, that index doesn't correspond with an item in the list-- try one of these!`)
             console.table(tasks)
+        }   
     }
-}
 
-    }
+}
 
 
 function deleteItem(toDelete){
@@ -130,6 +136,7 @@ function deleteItem(toDelete){
         }
     }
 }
+
 function quit(){
     //From the Todo Menu pressing q quits the application. Say farewell.
     console.log("Finished already? Great work! See you soon😃")
@@ -137,27 +144,55 @@ function quit(){
 
     }
 
+
+
     if (process.argv[2]) {
         fs.readFile(process.argv[2], {encoding: 'utf-8'}, (err, data) => {
           if (err) throw err;
           for (let i = 0; i < JSON.parse(data).length; i++) {
             parsed = (JSON.parse(data)[i])
-            
                 if (parsed.completed=== false){
                     tasks.push(["[ ]",parsed.title])
                 } else if (parsed.completed===true){
                     tasks.push(["[✓]",parsed.title])
                 }
-            //console.log(tasks)
-            
-            // console.log(parsed.completed)
-            // console.log(parsed.title)
-            
-            //tasks.push(JSON.parse(data)[i]);
-            
-          } //console.log(tasks)
+            } 
         })
       }
+     
+function saveToDo() {
+    filetasks = tasks.toString()
+    filename ='toDoList.json'
+    rl.question("What would you like to name your file? \n", (filename) => {
+        const jsonobj = JSON.stringify(tasks)
+        // for (let i = 0; i < tasks.length; i++) {
+        //     if (tasks[i][0] == '[ ]'){
+        //         jsonobj['completed' + 'false']
+        //     } else if(tasks[i][0] == '[✓]'){
+        //         jsonobj['completed' + 'true']
+        //     }
+        //     jsonobj['title' + tasks[i][0] ]
+            
+        // }
+
+        // if (filename == undefined){
+        //     filename = 'toDoList.json'
+        // }
+        fs.writeFile(filename, filetasks, err =>{
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("List saved to ", filename)
+            }
+        })
+
+        setTimeout(function() {
+            console.log(`\n \n ✅${filename} has been successfully saved\n \n`)
+        commandList()
+        }   , 500);
+        })  
+
+}
 
             
         
