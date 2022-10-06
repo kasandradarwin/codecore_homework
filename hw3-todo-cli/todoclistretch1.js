@@ -1,7 +1,7 @@
 const readline = require("readline");
 const fs = require("fs");
 const { resourceLimits } = require("worker_threads");
-const path = process.argv.slice(2);
+//const path = process.argv.slice(2);
 const tasks = [] //[['[ ]','make breakfast'],['[ ]','make breakfast'],['[ ]','make breakfast'],['[ ]','make breakfast']];
 //let stringDelete = ""
 
@@ -145,44 +145,59 @@ function quit(){
 
     }
 
-    if (path){
-        fs.readFile('./myTodos.json', "utf8", (err, path) =>{
-            // fetch('./myTodos.json')
-            // .then results=> resourceLimits.json())
-            // .then(console.log)
+    if (process.argv[2]) {
+        fs.readFile(process.argv[2], {encoding: 'utf-8'}, (err, data) => {
+          if (err) throw err;
+          for (let i = 0; i < JSON.parse(data).length; i++) {
+            parsed = (JSON.parse(data)[i])
+            
+            console.log(parsed.completed)
+            console.log(parsed.title)
+            
+            //tasks.push(JSON.parse(data)[i]);
+            
+          }
+        });console.log(tasks)
+      }
 
-            if (err) {
-                console.log(err);
-             } else {
+//     if (path){
+//         fs.readFile('./myTodos.json', "utf8", (err, path) =>{
+//             // fetch('./myTodos.json')
+//             // .then results=> resourceLimits.json())
+//             // .then(console.log)
 
-                if (tasks.length >0){
-                    JSON.stringify(tasks)
-                }
-                // const parseddata = JSON.parse(path, (key, value))
-                // console.log(parseddata.completed, parseddata.title);
+//             if (err) {
+//                 console.log(err);
+//              } else {
+
+//                 if (tasks.length >0){
+//                     JSON.stringify(tasks)
+//                 }
+//                 // const parseddata = JSON.parse(path, (key, value))
+//                 // console.log(parseddata.completed, parseddata.title);
         
-                JSON.parse(path, (key, value) => {
-                    //console.log(key,":",value)
-                    for (key in value){
-                        console.log(value.title)
-                        console.log(value.title)
-                            //console.log(key)
-                           // console.log(value[1])
-                           // console.log(key[1])
-                        if (value[0] == false){
-                            //tasks.push("[ ]",value[0])
-                            //console.log("[ ]",value[0])
-                        } else if (value[0] == true){
-                            //tasks.push(["[✓]",item[0]])
-                            //console.log("[✓]",title[0])
-                    } 
-                    //console.log(key,":",value); // log the current property name, the last is "".
-                    //return value; // return the unchanged property value.
-         }
-        } 
-        )}
-    })
-}
+//                 JSON.parse(path, (key, value) => {
+//                     //console.log(key,":",value)
+//                     for (key in value){
+//                         console.log(value.title)
+//                         console.log(value.title)
+//                             //console.log(key)
+//                            // console.log(value[1])
+//                            // console.log(key[1])
+//                         if (value[0] == false){
+//                             //tasks.push("[ ]",value[0])
+//                             //console.log("[ ]",value[0])
+//                         } else if (value[0] == true){
+//                             //tasks.push(["[✓]",item[0]])
+//                             //console.log("[✓]",title[0])
+//                     } 
+//                     //console.log(key,":",value); // log the current property name, the last is "".
+//                     //return value; // return the unchanged property value.
+//          }
+//         } 
+//         )}
+//     })
+// }
             
         
 
