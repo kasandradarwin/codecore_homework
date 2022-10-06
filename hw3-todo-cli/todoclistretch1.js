@@ -1,7 +1,18 @@
 const readline = require("readline")
-const tasks = [] //[['[ ]','make breakfast'],['[ ]','make breakfast'],['[ ]','make breakfast'],['[ ]','make breakfast']];
+const fs = require("fs");
+//const path = "./marked.csv"
+//let stringDelete = ""
+if (process.argv[2]){
+fs.readFile(path, "utf8", (err, data) =>{
+    if (err) {
+        console.log(err);
+     } else {
+        console.log(process.argv[2])
 
-
+     }
+    }
+}
+    
 
 const rl = readline.createInterface({
     input: process.stdin,
