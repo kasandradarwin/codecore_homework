@@ -165,6 +165,19 @@ function saveToDo() {
     filename ='toDoList.json'
     rl.question("What would you like to name your file? \n", (filename) => {
         //const jsonobj = {};
+        
+    
+
+        for (let i = 0; i < tasks.length; i++) {
+            if (tasks[i][0] == '[ ]'){
+                tasks[i][0] = false
+            } else if(tasks[i][0] == '[✓]'){
+                tasks[i][0] = true
+                //jsonobj['completed:' + true]
+            }
+
+        }
+
         const jsonString = JSON.stringify(Object.assign({}, tasks))
         console.log(jsonString)
         // for (let i = 0; i < tasks.length; i++) {
