@@ -1,6 +1,7 @@
-const readline = require("readline")
+const readline = require("readline");
+const fs = require("fs");
+const { resourceLimits } = require("worker_threads");
 const tasks = [] //[['[ ]','make breakfast'],['[ ]','make breakfast'],['[ ]','make breakfast'],['[ ]','make breakfast']];
-
 
 
 const rl = readline.createInterface({
@@ -55,7 +56,8 @@ function viewItem(){
         setTimeout(function() {
         console.log("📝 To Do List\n")
         for (let i = 0; i < tasks.length; i++) {
-            console.log(i, tasks[i].join(" "))  
+            console.log(i, tasks[i].join(" ")) 
+            //console.log(i, tasks[i])   
         }
         commandList()
         }, 500)
@@ -105,15 +107,9 @@ function completeItems(checkOff){
             console.table(tasks)
     }
 }
-    
-    //From the Todo Menu pressing cX where X refers to the index of a Todo item then Enter should mark that item as complete. 
-    //Tell the user which item was marked. Then, re-display the Todo Menu
+
     }
 
-  
-//     //From the Todo Menu pressing cX where X refers to the index of a Todo item then Enter should mark that item as complete. 
-//     //Tell the user which item was marked. Then, re-display the Todo Menu
-//     }
 
 function deleteItem(toDelete){
     if (tasks.length == 0){
@@ -138,7 +134,33 @@ function quit(){
     //From the Todo Menu pressing q quits the application. Say farewell.
     console.log("Finished already? Great work! See you soon😃")
     rl.close()
+
     }
+
+    if (process.argv[2]) {
+        fs.readFile(process.argv[2], {encoding: 'utf-8'}, (err, data) => {
+          if (err) throw err;
+          for (let i = 0; i < JSON.parse(data).length; i++) {
+            parsed = (JSON.parse(data)[i])
+            
+                if (parsed.completed=== false){
+                    tasks.push(["[ ]",parsed.title])
+                } else if (parsed.completed===true){
+                    tasks.push(["[✓]",parsed.title])
+                }
+            //console.log(tasks)
+            
+            // console.log(parsed.completed)
+            // console.log(parsed.title)
+            
+            //tasks.push(JSON.parse(data)[i]);
+            
+          } //console.log(tasks)
+        })
+      }
+
+            
+        
 
 welcome()
 
