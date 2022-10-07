@@ -145,33 +145,34 @@ function saveToDo() {
     rl.question("What would you like to name your file? Press enter to use 'toDoList.json' \n", (userfilename) => {
         let jsonobj = [];
 
-        filename = userfilename || 'toDoList.json';
+        let filename = userfilename || 'toDoList.json';
+
+        //check to see if the list item is completed or not, and pushes into an array of objects accordingly.
+    
 
         for (let item of tasks) {
             if (item.includes('[✓]')){
                 jsonobj.push({"completed": true, "title": (item.slice(1)).join(" ")})
             } else {
                 jsonobj.push({"completed": false, "title": (item.slice(1)).join(" ")})
-            }
-            
+            } 
         }
 
     const jsonString = JSON.stringify(jsonobj)
      
+    //this actually writes the list to a file using all the above stuff
         fs.writeFile(filename, jsonString, err =>{
             if (err) {
                 console.log(err);
             } else {
-                console.log("List saved to ", filename)
+            //if there are no errors, this will let the user know that all was well.
+                setTimeout(function() {
+                    console.log(`\n \n ✅${filename} has been successfully saved\n \n`)
+                commandList()
+                }  , 500);
             }
         })
-
-        setTimeout(function() {
-            console.log(`\n \n ✅${filename} has been successfully saved\n \n`)
-        commandList()
-        }   , 500);
         })  
-
 }
 
 // reads a file passed in as an argument, parses the info 
