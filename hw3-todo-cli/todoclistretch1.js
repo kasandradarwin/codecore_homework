@@ -154,7 +154,7 @@ function saveToDo() {
     rl.question("What would you like to name your file? Press enter to use 'toDoList.json' \n", (userfilename) => {
         let jsonobj = [];
 
-        filename = userfilename || 'toDoList.json';
+        filename = userfilename || 'myTodos.json';
 
         for (let item of tasks) {
             if (item.includes('[✓]')){
