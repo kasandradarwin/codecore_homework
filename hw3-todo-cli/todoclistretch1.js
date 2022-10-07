@@ -164,41 +164,48 @@ function saveToDo() {
     //filetasks = tasks.toString()
     filename ='toDoList.json'
     rl.question("What would you like to name your file? \n", (filename) => {
-        //const jsonobj = {};
-        
+        let jsonobj = [];
+        let taskList = tasks.split("\n")
+
+        for (let item of taskList) {
+            if (item.includes('[ ]')){
+                jsonobj.push({"completed": false, "title": i.slice()})
+            } else {
+                jsonobj.push({"completed": true, "title": i.slice()})
+            }
+            
+        }
     
 
-        for (let i = 0; i < tasks.length; i++) {
-            if (tasks[i][0] == '[ ]'){
-                tasks[i][0] = false
-            } else if(tasks[i][0] == '[✓]'){
-                tasks[i][0] = true
-                //jsonobj['completed:' + true]
-            }
+    
 
-        }
-
-        const jsonString = JSON.stringify(Object.assign({}, tasks))
-        console.log(jsonString)
+        
         // for (let i = 0; i < tasks.length; i++) {
         //     if (tasks[i][0] == '[ ]'){
-        //         console.log("in the if")
-        //         jsonobj['completed' + 'false']
-        //         console.log("in the else if")
+        //         tasks[i][0] = false
         //     } else if(tasks[i][0] == '[✓]'){
-        //         jsonobj['completed' + 'true']
+        //         tasks[i][0] = true
+        //         //jsonobj['completed:' + true]
         //     }
-        //     jsonobj['title' + tasks[i][0] ]
+
+            
         // }
 
+        //create empty array, which would be the result at the end-- push an object into array with
+        // 'compelted' and 'task' slicing task frmo list of tasks, pushing to obj
+
+        const jsonString = JSON.stringify(Object.assign({}, tasks))
+        console.log("json string" , jsonString)
+       
         // if (filename == undefined){
         //     filename = 'toDoList.json'
         // }
-        fs.writeFile(filename, jsonString, err =>{
+        fs.writeFile(filename, jsonobj, err =>{
             if (err) {
                 console.log(err);
             } else {
                 console.log("List saved to ", filename)
+            
             }
         })
 
