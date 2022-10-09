@@ -1,0 +1,14 @@
+<%- include("./partials/header.ejs")%>
+
+<h1><%-title%></h1>
+
+<% for (let meme of memes){ %>
+    <div>
+        <img src="<%-meme%>" width="500" >
+
+    </div>
+
+<% } %>
+
+
+<%- include("./partials/footer.ejs")%>
