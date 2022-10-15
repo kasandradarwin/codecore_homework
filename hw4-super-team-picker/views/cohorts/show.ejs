@@ -3,21 +3,58 @@
 <h1>Cohorts</h1>
 
 <div class="card mb-4">
-  <% if(cohorts.logo_url) { %>
-    <img class="card-img-top" src="<%- post.image_url %>" alt="post image">
-  <% } %>
+  <!-- <% if(cohort.logo_url) { %>
+    <img class="card-img-top team-logo" src="<%- cohort.logo_url %>" alt="cohort logo">
+  <% } else { %>
+    <img class="card-img-top team-logo" src="https://www.emmys.com/sites/default/files/bios/tim-robinson-2022-noms-2-450x600.jpg" alt="cohort logo">
+  <% } %> -->
   <div class="card-body">
-    <h5><%- cohorts.team_name %></h5>
+    <h5><%- cohort.team_name %></h5>
     <p class="card-body">
-      <%- cohorts.members %>
+      <%- cohort.members %>
     </p>
-    <form action="/posts/<%- cohorts.id %>" method="POST">
-      <input type="hidden" name="_method" value="DELETE">
-      <input type="submit" class="btn btn-outline-danger" value="DELETE">
-    </form>
-   
-    <a href="/cohorts/<%- cohorts.id %>/edit">Edit</a>
+<hr/>
+<br>
+
+<p> Method</p>
+<form>
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="team-count" id="team-count" value="team-count">
+    <label class="form-check-label" for="team-count">
+      Team Count
+    </label>
   </div>
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="number-per-team" id="number-per-team" value="number-per-team">
+    <label class="form-check-label" for="number-per-team">
+      Number Per Team
+    
+    </label>
+  </div>
+  <div class="form-group">
+    <br>
+    <label for="formGroupExampleInput">Quantity</label>
+    <input type="text" class="form-control" id="quantity" name="quantity">
+  </div>
+  <br>
+  <form action="/cohorts/<%- cohort.id %>" method="SUBMIT">
+    <input type="hidden" name="_method" value="PATCH">
+  <button type="submit" class="btn btn-outline-primary btn-lg btn-block">Assign Teams</button>
+  
+</form>
+  
+  
+    
 </div>
+
+
+
+<form action="/cohorts/<%- cohort.id %>" method="POST">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" class="btn btn-danger float-end" value="DELETE COHORT">
+  <input type="hidden" name="_method" value="PATCH">
+</form>
+<a class="btn btn-primary" href="./edit" role="button">EDIT COHORT</a>
+
 
 <%- include("../partials/footer.ejs")%>

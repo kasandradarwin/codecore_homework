@@ -13,7 +13,7 @@ router.get('/',(req, res) => {
     .orderBy('created_at', 'desc')
     .then(cohorts => {
         res.render('cohorts/index', { cohorts: cohorts })
-    })
+    });
     })
     
 // render new cohort page
@@ -33,22 +33,23 @@ router.post('/', (req,res) => {
         .then(cohort => {
             cohort = cohort[0]
             res.redirect(`cohorts/${cohort.id}`)
-        })
+        });
 })
 
 //show a single cohort
 router.get('/:id', (req, res) => {
-    knex('cohorts')
+    return knex('cohorts')
+    .select('*').from('cohorts')
     .where('id', req.params.id)
     .first()
     .then(cohort => {
         if (!cohort) {
             res.send("Cohort does not exist, you can create it though!")
         } else {
-            res.render('cohorts/show', {cohort:cohort})
+            res.render('cohorts/show', { cohort: cohort, method.query.method, quantity.query.quantity })
         }
         })
-    })
+    });
 
 
 // -----------------Show a single Post----------------
@@ -71,11 +72,12 @@ router.get('/:id', (req, res) => {
     .where('id', req.params.id)
     .first()
     .then(cohort => {
-      res.render('cohorts/edit', {cohort: cohort})
+      res.render('edit', {cohort: cohort})
+      //  res.render(`/cohorts/edit/${req.query.id}`, {cohort: cohort})
     })
   })
   
-//   //---------------------Update particular Post---------------
+//   //---------------------Update particular cohort---------------
   router.patch('/:id', (req, res) => {
     knex('cohorts')
     .where('id', req.params.id)

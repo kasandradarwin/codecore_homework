@@ -7,14 +7,14 @@
       <div class="card-body">
         <img src= 
           "<%= cohort.logo_url%>"
-          class="card-text">
+          class="card-text team-logo">
         </img>
-        <a href="/cohorts/<%- cohort.id %>">
+        
           <h5 class="card-title"><%= cohort.team_name %></h5>
-        </a>
+   
         <p class="card-text"><%= cohort.members %></p>
         <p class="card-text"><%= cohort.timestamps %></p>
-
+        <a class="btn btn-primary" href="/cohorts/<%- cohort.id %>" role="button">Show Cohort</a>
       </div>
     </div>
     <% } %>

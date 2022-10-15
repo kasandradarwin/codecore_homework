@@ -1,11 +1,29 @@
 <%- include("../partials/header.ejs")%>
 
 <h1>Edit Cohort</h1>
-<form action="/cohorts/<%- cohort.id %>" method="POST">
-  <input type="hidden" name="_method" value="PATCH">
-  <!-- <%- include("./new.ejs") %> -->
-  <input type="submit" value="Edit Cohort" class="btn btn-outline-success">
-</form>
+
+<form method="POST" action="/cohorts/<%= cohort.id %>">
+  <div class="form-group mb-3">
+      <label for="logo_url">Logo Url</label>
+      <input name="logo_url" type="url" class="form-control" id="logo_url" 
+      <% if (cohort.logo_url%> 
+      value=<%-cohort.logo_url%>
+      />
+   </div>
+  
+  <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Name</label>
+      <input name="team_name" input type="text" class="form-control" id="team_name" value="<%-cohort.team_name%>">
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label">Members</label>
+      <textarea name="team_members" class="form-control" id="team_members" rows="3" value="<%-cohort.members%>"></textarea>
+    </div>
+  
+    <button type="submit" class="btn btn-outline-primary float-end">Submit</button>
+  
+  </form>
+
 
 
 
