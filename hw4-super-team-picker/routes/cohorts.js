@@ -46,7 +46,7 @@ router.get('/:id', (req, res) => {
         if (!cohort) {
             res.send("Cohort does not exist, you can create it though!")
         } else {
-            res.render('cohorts/show', { cohort: cohort, method.query.method, quantity.query.quantity })
+            res.render('cohorts/show', { cohort: cohort, method: req.query.method, quantity: req.query.quantity })
         }
         })
     });
@@ -71,8 +71,8 @@ router.get('/:id', (req, res) => {
     knex('cohorts')
     .where('id', req.params.id)
     .first()
-    .then(cohort => {
-      res.render('edit', {cohort: cohort})
+    .then( cohort => {
+      res.render('cohorts/edit', {cohort: cohort})
       //  res.render(`/cohorts/edit/${req.query.id}`, {cohort: cohort})
     })
   })

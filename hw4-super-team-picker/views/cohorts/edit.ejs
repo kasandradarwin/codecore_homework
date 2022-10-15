@@ -6,8 +6,9 @@
   <div class="form-group mb-3">
       <label for="logo_url">Logo Url</label>
       <input name="logo_url" type="url" class="form-control" id="logo_url" 
-      <% if (cohort.logo_url%> 
+      <% if (cohort.logo_url) { %> 
       value=<%-cohort.logo_url%>
+      <% } %> 
       />
    </div>
   

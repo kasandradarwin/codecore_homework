@@ -3,11 +3,6 @@
 <h1>Cohorts</h1>
 
 <div class="card mb-4">
-  <!-- <% if(cohort.logo_url) { %>
-    <img class="card-img-top team-logo" src="<%- cohort.logo_url %>" alt="cohort logo">
-  <% } else { %>
-    <img class="card-img-top team-logo" src="https://www.emmys.com/sites/default/files/bios/tim-robinson-2022-noms-2-450x600.jpg" alt="cohort logo">
-  <% } %> -->
   <div class="card-body">
     <h5><%- cohort.team_name %></h5>
     <p class="card-body">
@@ -17,7 +12,7 @@
 <br>
 
 <p> Method</p>
-<form>
+<form method="get">
   <div class="form-check">
     <input class="form-check-input" type="radio" name="team-count" id="team-count" value="team-count">
     <label class="form-check-label" for="team-count">
@@ -56,5 +51,54 @@
 </form>
 <a class="btn btn-primary" href="./edit" role="button">EDIT COHORT</a>
 
+<% 
+const individualmembers = cohort.members.split(",")
+const assigned = []
+const randomnumber = Math.ceil(Math.random()*individualmembers.length)
+
+%>
+
+
+
+
+   
+
+<% if (method === 'team-count'){ %>
+
+<ul>
+  <% for (let i =0; i < individualmembers.length; i++) {
+    let numberremaining = (individualmembers.length-1)
+
+    let j = Math.ceil(Math.random()*numberremaining)%>
+    if assigned.includes(individualmembers[j]){
+      continue;
+    }
+    <li><%=individualmembers[j]%></li>
+
+    <% assigned.push(individualmembers[j])
+    numberremaining--
+    
+    %>
+
+    <% } %>
+</ul>
+<% } %>
+
+
+
+<% if (method === 'number-per-team'){ %>
+
+  <% } %>
+
+
+
+
+
+
+
+
+
+
 
 <%- include("../partials/footer.ejs")%>
+
