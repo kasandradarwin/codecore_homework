@@ -1,9 +1,7 @@
 const express = require('express');
 const app = express()
 
-
-const router = require('./routes')
-app.use('/', router)
+const cohorts = require('./routes/cohorts')
 
 app.set('view engine', 'ejs')
 app.set('views','views')
@@ -28,13 +26,14 @@ app.use(
     })
 )
 
-
 // the welcome/home page:
 
 app.get('/',(req, res) => {
    // res.send("<h1> This is my root page. Hi there! </h1>")
-   res.render('welcome')
+   res.render('home')
    })
+
+app.use('/cohorts', cohorts)
 
 const PORT = process.env.PORT || 3000;
 const DOMAIN = 'localhost'

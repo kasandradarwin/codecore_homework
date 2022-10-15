@@ -1,0 +1,21 @@
+<%- include("../partials/header.ejs")%>
+
+<form method="POST" action="/cohorts">
+<div class="form-group mb-3">
+    <label for="logo_url">Logo Url</label>
+    <input name="logo_url" type="url" class="form-control" id="logo_url" placeholder="e.g. http://www.example.com/some.png"/>
+ </div>
+
+<div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Name</label>
+    <input name="team_name" input type="text" class="form-control" id="team_name" placeholder="Flying Funks">
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label">Members</label>
+    <textarea name="team_members" class="form-control" id="team_members" rows="3" placeholder="Jon Snow, Daenerys, Melisandre, Arya Stark"></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-outline-primary float-end">Submit</button>
+
+</form>
+  <%- include("../partials/footer.ejs")%>

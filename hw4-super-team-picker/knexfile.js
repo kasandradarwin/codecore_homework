@@ -22,7 +22,10 @@
       database: 'team-picker',
       user:     'nimbus-user',
       password: 'password'
-    }
+    },
+    seeds: {
+    directory:"./db/seeds"
   }
 }
-  };
+}
+ }

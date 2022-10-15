@@ -1,0 +1,26 @@
+<%- include("../partials/header.ejs")%>
+
+<h1>Cohort Index</h1>
+<div>
+  <% for (let cohort of cohorts)  { %>
+    <div class="card mb-4">
+      <div class="card-body">
+        <img src= 
+          "<%= cohort.logo_url%>"
+          class="card-text">
+        </img>
+        <a href="/cohorts/<%- cohort.id %>">
+          <h5 class="card-title"><%= cohort.team_name %></h5>
+        </a>
+        <p class="card-text"><%= cohort.members %></p>
+        <p class="card-text"><%= cohort.timestamps %></p>
+
+      </div>
+    </div>
+    <% } %>
+  </div>
+
+
+
+
+<%- include("../partials/footer.ejs")%>

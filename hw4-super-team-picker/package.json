@@ -2,7 +2,7 @@
   "name": "hw4-super-team-picker",
   "version": "1.0.0",
   "description": "",
-  "main": "team-picker.js",
+  "main": "app.js",
   "scripts": {
     "start": "nodemon"
   },
