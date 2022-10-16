@@ -1,5 +1,6 @@
 <%- include("../partials/header.ejs")%>
 
+
 <h1>Cohorts</h1>
 
 <div class="card mb-4">
@@ -12,7 +13,7 @@
 <br>
 
 <p> Method</p>
-<form method="get">
+<form method="get" action="/cohorts/<%-cohort.id%>">
   <div class="form-check">
     <input class="form-check-input" type="radio" name="team-count" id="team-count" value="team-count">
     <label class="form-check-label" for="team-count">
@@ -45,60 +46,105 @@
 
 
 <form action="/cohorts/<%- cohort.id %>" method="POST">
+  <a class="btn btn-primary" href="/cohorts/<%- cohort.id %>/edit" id="edit">EDIT COHORT</a>
   <input type="hidden" name="_method" value="DELETE">
-  <input type="submit" class="btn btn-danger float-end" value="DELETE COHORT">
+  <input type="submit" class="btn btn-danger" value="DELETE COHORT">
   <input type="hidden" name="_method" value="PATCH">
 </form>
-<a class="btn btn-primary" href="./edit" role="button">EDIT COHORT</a>
-
-<% 
-const individualmembers = cohort.members.split(",")
-const assigned = []
-const randomnumber = Math.ceil(Math.random()*individualmembers.length)
-
-%>
 
 
+<% let members= cohort.members
+console.log(members)
+console.log(quantity)
+%> 
+
+<!-- //shuffles the order of the array -->
+
+<%function shuffler(teamArray) {
+    for (let i = 0; i < teamArray.length; i++) {
+        let placeholder = teamArray[i]
+        let randomtmember =Math.floor(Math.random() * (1 + i))
+        teamArray[i] = teamArray[randomtmember]
+        teamArray[randomtmember] = placeholder
+    }   
+    return teamArray
+}
 
 
+function teamCount (members, quantity){
+  
+    let pool = shuffler(members)
+    console.log(pool)
+    let teamsize = Math.floor(pool.length / quantity)
+    let finalteams = []
+
+    for (let i = 0; i < quantity; i++) {
+        // console.log("pool: ",pool)
+        // console.log("teamsize: ",teamsize)
+
+        finalteams.push((pool.splice(0,teamsize)))
+
+        console.log("finalteams: ",finalteams)  
+    }
+    if (pool.length > 0){
+        for (let i = 0; i < pool.length; i++) {
+            if(pool.length >0){
+                let element = pool.splice(0,1).flat().toString()
+                finalteams[i].push(element)
+            } else {
+                break;
+            }
+            }
+        }
+        console.log(result)
+        return result
+    }
+
+
+function numberPerTeam(members, quantity){
+    let pool = shuffler(members)
+    let finalteams = []
+
+    for (let i = 0; i < pool.length; i++) {
+        finalteams.push(pool.splice(0, quantity))
+        
+    }
+return finalteams
+
+} %>
    
 
-<% if (method === 'team-count'){ %>
 
-<ul>
-  <% for (let i =0; i < individualmembers.length; i++) {
-    let numberremaining = (individualmembers.length-1)
+   <% assignedTeam = cohort.members.split(",") %>
 
-    let j = Math.ceil(Math.random()*numberremaining)%>
-    if assigned.includes(individualmembers[j]){
-      continue;
-    }
-    <li><%=individualmembers[j]%></li>
 
-    <% assigned.push(individualmembers[j])
-    numberremaining--
-    
-    %>
-
-    <% } %>
-</ul>
-<% } %>
+<%if(method === 'team-count'){ 
+    assignedTeam = teamCount(assignedTeam, quantity)
+}else if(method === 'number-per-team'){ 
+    assignedTeam = numberPerTeam(assignedTeam, quantity)
+} %>
 
 
 
-<% if (method === 'number-per-team'){ %>
-
-  <% } %>
-
-
-
-
-
-
-
-
-
-
+<%if(assignedTeam){ %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Team Members</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for (let team of assignedTeam){ %>
+      <tr>
+        <th scope="row"><%-assignedTeam.indexOf(team)+1%></th>
+        <td><%-team%></td>
+      </tr>
+      <%} %>
+  </tbody>
+</table>
+<%  } %>
+  
 
 <%- include("../partials/footer.ejs")%>
 
