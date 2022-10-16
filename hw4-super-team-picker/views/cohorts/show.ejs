@@ -35,7 +35,7 @@
   <br>
   <form action="/cohorts/<%- cohort.id %>" method="SUBMIT">
     <input type="hidden" name="_method" value="PATCH">
-  <button type="submit" class="btn btn-outline-primary btn-lg btn-block">Assign Teams</button>
+  <button type="submit" class="btn btn-outline-primary btn-block">Assign Teams</button>
   
 </form>
   
@@ -43,14 +43,6 @@
     
 </div>
 
-
-
-<form action="/cohorts/<%- cohort.id %>" method="POST">
-  <a class="btn btn-primary" href="/cohorts/<%- cohort.id %>/edit" id="edit">EDIT COHORT</a>
-  <input type="hidden" name="_method" value="DELETE">
-  <input type="submit" class="btn btn-danger" value="DELETE COHORT">
-  <input type="hidden" name="_method" value="PATCH">
-</form>
 
 
 <% let members= cohort.members
@@ -113,14 +105,12 @@ return finalteams
 
 } %>
    
-
-
-   <% assignedTeam = cohort.members.split(",") %>
-
-
+<%let assignedTeam; %>
 <%if(method === 'team-count'){ 
+    assignedTeam = cohort.members.split(",") 
     assignedTeam = teamCount(assignedTeam, quantity)
 }else if(method === 'number-per-team'){ 
+    assignedTeam = cohort.members.split(",") 
     assignedTeam = numberPerTeam(assignedTeam, quantity)
 } %>
 
@@ -144,6 +134,14 @@ return finalteams
   </tbody>
 </table>
 <%  } %>
+
+
+<form action="/cohorts/<%- cohort.id %>" method="POST">
+  <a class="btn btn-primary" href="/cohorts/<%- cohort.id %>/edit" id="edit">EDIT COHORT</a>
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" class="btn btn-danger" value="DELETE COHORT">
+  <input type="hidden" name="_method" value="PATCH">
+</form>
   
 
 <%- include("../partials/footer.ejs")%>

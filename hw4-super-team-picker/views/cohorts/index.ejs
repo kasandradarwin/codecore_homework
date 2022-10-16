@@ -5,10 +5,13 @@
   <% for (let cohort of cohorts)  { %>
     <div class="card mb-4">
       <div class="card-body">
+        <% if (cohort.logo_url) { %>
         <img src= 
-          "<%= cohort.logo_url%>"
-          class="card-text team-logo">
-        </img>
+          "<%= cohort.logo_url%>" class="team-logo"> </img>
+          <%} else {%>
+            <img src="https://www.emmys.com/sites/default/files/styles/bio_pics_detail/public/bios/tim-robinson-2022-noms-2-450x600.jpg?itok=8GrRO9s7" class="team-logo"> </img>
+            <% } %>
+          
         
           <h5 class="card-title"><%= cohort.team_name %></h5>
    

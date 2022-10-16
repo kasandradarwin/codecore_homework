@@ -1,6 +1,7 @@
 .team-logo {
     border-radius: 50%;
-    height: 5em;
-    width: 5em;
+    height: 4em;
+    width: 4em;
     float: left;
+    margin: 2em;
 }
