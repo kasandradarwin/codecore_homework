@@ -14,23 +14,32 @@
 
 <p> Method</p>
 <form method="get" action="/cohorts/<%-cohort.id%>">
+  <% let teamcountchecked = ""
+  let numberperteamchecked =""
+  if(method ==="team-count"){
+    teamcountchecked= "checked"
+  }else if(method === "number-per-team"){
+    numberperteamchecked="checked"
+  } %>
+  
+
   <div class="form-check">
-    <input class="form-check-input" type="radio" name="team-count" id="team-count" value="team-count">
-    <label class="form-check-label" for="team-count">
+    <input class="form-check-input" type="radio" name="method" id="team-count" value="team-count">
+    <label class="form-check-label" for="team-count" <%-teamcountchecked%>>
       Team Count
     </label>
   </div>
   <div class="form-check">
-    <input class="form-check-input" type="radio" name="number-per-team" id="number-per-team" value="number-per-team">
-    <label class="form-check-label" for="number-per-team">
+    <input class="form-check-input" type="radio" name="method" id="number-per-team" value="number-per-team">
+    <label class="form-check-label" for="number-per-team" <%-numberperteamchecked%>>
       Number Per Team
     
     </label>
   </div>
   <div class="form-group">
     <br>
-    <label for="formGroupExampleInput">Quantity</label>
-    <input type="text" class="form-control" id="quantity" name="quantity">
+    <label for="quantity">Quantity</label>
+    <input type="number" class="form-control" id="quantity" name="quantity">
   </div>
   <br>
   <form action="/cohorts/<%- cohort.id %>" method="SUBMIT">
@@ -45,10 +54,6 @@
 
 
 
-<% let members= cohort.members
-console.log(members)
-console.log(quantity)
-%> 
 
 <!-- //shuffles the order of the array -->
 
@@ -88,8 +93,8 @@ function teamCount (members, quantity){
             }
             }
         }
-        console.log(result)
-        return result
+
+        return finalteams
     }
 
 
@@ -137,9 +142,9 @@ return finalteams
 
 
 <form action="/cohorts/<%- cohort.id %>" method="POST">
-  <a class="btn btn-primary" href="/cohorts/<%- cohort.id %>/edit" id="edit">EDIT COHORT</a>
+  <a class="btn btn-primary show-page-btn" href="/cohorts/<%- cohort.id %>/edit" id="edit">EDIT COHORT</a>
   <input type="hidden" name="_method" value="DELETE">
-  <input type="submit" class="btn btn-danger" value="DELETE COHORT">
+  <input type="submit" class="btn btn-danger show-page-btn" value="DELETE COHORT">
   <input type="hidden" name="_method" value="PATCH">
 </form>
   

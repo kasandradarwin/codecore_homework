@@ -20,14 +20,12 @@
     </div>
     <div class="mb-3">
       <label for="exampleFormControlTextarea1" class="form-label">Members</label>
-      <textarea name="team_members" input type="text"class="form-control" id="team_members" rows="3" value="<%-cohort.members%>"></textarea>
+      <input name="team_members" input type="text" class="form-control" id="team_members" rows="3" value="<%-cohort.members%> ">
     </div>
   
       <input type="submit" value="Submit Changes" class="btn btn-outline-primary float-end">
 
   </form>
-
-
 
 
 <%- include("../partials/footer.ejs")%>
