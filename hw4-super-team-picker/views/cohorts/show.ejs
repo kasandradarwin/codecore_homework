@@ -39,7 +39,7 @@
   <div class="form-group">
     <br>
     <label for="quantity">Quantity</label>
-    <input type="number" class="form-control" id="quantity" name="quantity">
+    <input type="number" class="form-control" id="quantity" name="quantity" required>
   </div>
   <br>
   <form action="/cohorts/<%- cohort.id %>" method="SUBMIT">
@@ -75,58 +75,30 @@
     let teamsize = Math.floor(pool.length / quantity)
     let finalteams = []
 
-    for (let i = 0; i < quantity; i++) {
-       
-        finalteams.push((pool.splice(0,teamsize)))
-
-        console.log("finalteams: ",finalteams)  
+    while (pool.length > 0) {
+      finalteams.push((pool.splice(0,teamsize)))
+      
     }
-
-        for (let i = 0; i < pool.length; i++) {
-            if(pool.length >0){
-                let element = pool.splice(0,1)
-                finalteams[i].push(element)
-            } else {
-                break;
-            }
-            }
       
         return finalteams
-    }
+} %>
 
+<!-- splits the cohort into teams of the given number -->
 
-function numberPerTeam(members, quantity){
+<%function numberPerTeam(members, quantity){
 
     let pool = shuffler(members)
 
     let finalteams = []
 
-    console.log("cohort members:" ,  members)
-      // console.log("pool: ", pool)
-      // console.log("pool length: ",pool.length)
-      // console.log("quantity: " , quantity)
-  
-    for (let i = 0; i < pool.length; i++) {
-      
-      let element =pool.splice(0,quantity)
+      while (pool.length > 0) {
+        let element = pool.splice(0,quantity)
+      console.log("pool size remaining: ", pool.length)
       console.log("element: ",element)
  
         finalteams.push(element)
-        
-    }
-
-    for (let i = 0; i < pool.length; i++) {
-        if(pool.length >0){
-          let element =pool.splice(0,quantity)
-      console.log("element: ",element)
+      }
  
-        finalteams.push(element)
-        
-        } else {
-            break;
-        }
-}
-    console.log(finalteams)
 return finalteams
 
 } %>
