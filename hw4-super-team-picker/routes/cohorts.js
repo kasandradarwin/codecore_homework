@@ -46,7 +46,7 @@ router.get('/:id', (req, res) => {
         if (!cohort) {
             res.send("Cohort does not exist, you can create it though!")
         } else {
-            res.render('cohorts/show', { cohort: cohort, method: req.query.method, quantity: req.query.quantity })
+            res.render('cohorts/show', { cohort: cohort, method: req.query.method, quantity: req.query.quantity, selectedmethod:req.query.method, enteredquantity:req.query.quantity })
         }
         })
     });

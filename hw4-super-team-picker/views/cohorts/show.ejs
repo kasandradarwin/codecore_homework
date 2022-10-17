@@ -16,22 +16,29 @@
 <form method="get" action="/cohorts/<%-cohort.id%>">
   <% let teamcountchecked = ""
   let numberperteamchecked =""
-  if(method ==="team-count"){
+  if(selectedmethod ==="team-count"){
     teamcountchecked= "checked"
-  }else if(method === "number-per-team"){
+  }else if(selectedmethod === "number-per-team"){
     numberperteamchecked="checked"
-  } %>
+  } 
+  console.log("selected method", selectedmethod)
+  console.log("number per team:" , numberperteamchecked)
+  console.log("team count:" ,teamcountchecked)
+
+
   
+  %>
+   <%-console.log(enteredquantity)%>
 
   <div class="form-check">
-    <input class="form-check-input" type="radio" name="method" id="team-count" value="team-count">
-    <label class="form-check-label" for="team-count" <%-teamcountchecked%>>
+    <input class="form-check-input" type="radio" name="method" id="flexRadioDefault1"  <%-teamcountchecked%> value="team-count">
+    <label class="form-check-label" for="flexRadioDefault1">
       Team Count
     </label>
   </div>
   <div class="form-check">
-    <input class="form-check-input" type="radio" name="method" id="number-per-team" value="number-per-team">
-    <label class="form-check-label" for="number-per-team" <%-numberperteamchecked%>>
+    <input class="form-check-input" type="radio" name="method" id="flexRadioDefault2" <%-numberperteamchecked%> value="number-per-team">
+    <label class="form-check-label" for="flexRadioDefault2" >
       Number Per Team
     
     </label>
@@ -39,7 +46,7 @@
   <div class="form-group">
     <br>
     <label for="quantity">Quantity</label>
-    <input type="number" class="form-control" id="quantity" name="quantity" required>
+    <input type="number" class="form-control" id="quantity" name="quantity" <% if(enteredquantity){%> value="<%-enteredquantity%>" <%}%> required>
   </div>
   <br>
   <form action="/cohorts/<%- cohort.id %>" method="SUBMIT">
