@@ -46,7 +46,7 @@
   <div class="form-group">
     <br>
     <label for="quantity">Quantity</label>
-    <input type="number" class="form-control" id="quantity" name="quantity" <% if(enteredquantity){%> value="<%-enteredquantity%>" <%}%> required>
+    <input type="number" class="form-control" id="quantity" name="quantity" min="1" max="<%cohort.members.length%>" <%if(enteredquantity){%> value="<%-enteredquantity%>" <%}%> required>
   </div>
   <br>
   <form action="/cohorts/<%- cohort.id %>" method="SUBMIT">
