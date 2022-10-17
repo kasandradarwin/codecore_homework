@@ -65,47 +65,68 @@
         teamArray[randomtmember] = placeholder
     }   
     return teamArray
-}
+}%>
 
+<!-- split the cohort into a certain number of Teams -->
 
-function teamCount (members, quantity){
+<% function teamCount (members, quantity){
   
     let pool = shuffler(members)
-    console.log(pool)
     let teamsize = Math.floor(pool.length / quantity)
     let finalteams = []
 
     for (let i = 0; i < quantity; i++) {
-        // console.log("pool: ",pool)
-        // console.log("teamsize: ",teamsize)
-
+       
         finalteams.push((pool.splice(0,teamsize)))
 
         console.log("finalteams: ",finalteams)  
     }
-    if (pool.length > 0){
+
         for (let i = 0; i < pool.length; i++) {
             if(pool.length >0){
-                let element = pool.splice(0,1).flat().toString()
+                let element = pool.splice(0,1)
                 finalteams[i].push(element)
             } else {
                 break;
             }
             }
-        }
-
+      
         return finalteams
     }
 
 
 function numberPerTeam(members, quantity){
+
     let pool = shuffler(members)
+
     let finalteams = []
 
+    console.log("cohort members:" ,  members)
+      // console.log("pool: ", pool)
+      // console.log("pool length: ",pool.length)
+      // console.log("quantity: " , quantity)
+  
     for (let i = 0; i < pool.length; i++) {
-        finalteams.push(pool.splice(0, quantity))
+      
+      let element =pool.splice(0,quantity)
+      console.log("element: ",element)
+ 
+        finalteams.push(element)
         
     }
+
+    for (let i = 0; i < pool.length; i++) {
+        if(pool.length >0){
+          let element =pool.splice(0,quantity)
+      console.log("element: ",element)
+ 
+        finalteams.push(element)
+        
+        } else {
+            break;
+        }
+}
+    console.log(finalteams)
 return finalteams
 
 } %>
