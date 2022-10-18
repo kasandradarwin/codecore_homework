@@ -51,22 +51,8 @@ router.get('/:id', (req, res) => {
         })
     });
 
-
-// -----------------Show a single Post----------------
-router.get('/:id', (req, res) => {
-    knex('cohorts')
-      .where('id', req.params.id)
-      .first() // this will grab the first instance that matches the requirements
-      .then(cohort => {
-        if (!cohort) {
-          res.send("Cohort does not exist, you can create it though!")
-        } else {
-          res.render('cohorts/show', {cohort: cohort})
-        }
-      })
-  })
   
-//   //------------Render Edit Post template---------------
+//   //------------Render Edit cohort template---------------
   router.get('/:id/edit', (req, res) => {
     knex('cohorts')
     .where('id', req.params.id)
@@ -92,7 +78,7 @@ router.get('/:id', (req, res) => {
   })
 
 
-//   // --------------Delete/destroy a single Post---------
+//   // --------------Delete/destroy a single cohort---------
   router.delete("/:id", (req,res) => {
     knex('cohorts')
       .where('id', req.params.id)

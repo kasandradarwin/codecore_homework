@@ -2,6 +2,10 @@
 
 <h1>Edit Cohort</h1>
 
+<!-- the edit form.. I recreated the form instead of pulling it 
+  in from a 'partials' file, because I wanted to be able to
+  populate the values to make editing easier -->
+
 <form action="/cohorts/<%- cohort.id %>" method="POST">
   <input type="hidden" name="_method" value="PATCH">
   <div class="form-group mb-3">

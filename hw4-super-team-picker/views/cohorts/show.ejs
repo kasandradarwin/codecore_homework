@@ -1,5 +1,8 @@
 <%- include("../partials/header.ejs")%>
 
+<!-- This page is a beast, but not every beast is ugly, right? 
+  Some have really kind hearts, like this page
+I found it was easier to have the functions on this page directly -->
 
 <h1>Cohorts</h1>
 
@@ -23,14 +26,11 @@
     numberperteamchecked="checked"
   } 
 
-  
+  // This is specifically for the quantity field, so that you can not 
+  // attempt to divide the teams into group larger than the team size
+
   let = maxquantity = (cohort.members.split(",")).length
-  console.log("max quantity" , maxquantity)
-
-
-  
   %>
-   <%-console.log(enteredquantity)%>
 
   <div class="form-check">
     <input class="form-check-input" type="radio" name="method" id="flexRadioDefault1"  <%-teamcountchecked%> value="team-count">
@@ -62,7 +62,8 @@
 
 
 
-<!-- //shuffles the order of the array -->
+<!-- //shuffles the order of the array. I made this separate
+   from the other functions since its used in both -->
 
 <%function shuffler(teamArray) {
     for (let i = 0; i < teamArray.length; i++) {
@@ -81,44 +82,22 @@
     let pool = shuffler(members)
     let teamsize = Math.floor(pool.length / quantity)
     let finalteams = []
-    counter = 0
-
-    console.log("members", members)
-    console.log("teamsize", teamsize)
-    console.log("pool", pool)
-
   
    for (let i = 0; i < quantity; i++) {
       finalteams.push((pool.splice(0,teamsize)))
    }
-
+//catches the overhang
    if (pool.length > 0){
     for (let i = 0; i < finalteams.length; i++) {
       if(pool.length >0){
-        let element = pool.splice(0,1).flat().toString()
+        let element = pool.splice(0,1)
         finalteams[i].push(element)
       }else{
         break;
       }
-      
+  
     }
    }
-  
-
-
-
-
-    // THIS WORKS (kinda), DONT TOUCH:
-    // while (pool.length > 0) {
-    //   finalteams.push((pool.splice(0,teamsize)))
-    //   console.log("team size: " ,teamsize)
-
-    //   if (finalteams.length == quantity) {
-    //     for (let i = 0; i < pool.length; i++) {
-    //        finalteams[i].push((pool.splice(0,1)))
-    //   }
-    // }
-    // }
       
         return finalteams
 } %>
@@ -128,8 +107,8 @@
 <%function numberPerTeam(members, quantity){
 
     let pool = shuffler(members)
-
     let finalteams = []
+  
 
       while (pool.length > 0) {
         let element = pool.splice(0,quantity)
@@ -142,6 +121,10 @@
 return finalteams
 
 } %>
+
+<!-- Although the assigned teams is repeated, 
+  if I declared it outside of the if statement,
+   it did weird things that I wasn't ready for-->
    
 <%let assignedTeam %>
 <%if(method === 'team-count'){ 
@@ -152,7 +135,8 @@ return finalteams
     assignedTeam = numberPerTeam(assignedTeam, quantity)
 } %>
 
-
+<!-- this causes the bootstrap table to only appear when we assign the
+   teams, and then fills in the appropriate information -->
 
 <%if(assignedTeam){ %>
 <table class="table">
@@ -173,6 +157,9 @@ return finalteams
 </table>
 <%  } %>
 
+<!-- There are the edit and delete buttons. 
+  The edit is just a link that redirects to the edit page,
+the delete button has function of its own -->
 
 <form action="/cohorts/<%- cohort.id %>" method="POST">
   <a class="btn btn-primary show-page-btn" href="/cohorts/<%- cohort.id %>/edit" id="edit">EDIT COHORT</a>

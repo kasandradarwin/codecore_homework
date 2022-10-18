@@ -1,5 +1,8 @@
 <%- include("../partials/header.ejs")%>
 
+<!-- allows you to create a new cohort logo not required,
+   but name and members are required -->
+
 <form method="POST" action="/cohorts">
 <div class="form-group mb-3">
     <label for="logo_url">Logo Url</label>
@@ -8,11 +11,11 @@
 
 <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label">Name</label>
-    <input name="team_name" input type="text" class="form-control" id="team_name" placeholder="Flying Funks">
+    <input name="team_name" input type="text" class="form-control" id="team_name" placeholder="Flying Funks" required>
   </div>
   <div class="mb-3">
     <label for="exampleFormControlTextarea1" class="form-label">Members</label>
-    <textarea name="team_members" class="form-control" id="team_members" rows="3" placeholder="Jon Snow, Daenerys, Melisandre, Arya Stark"></textarea>
+    <textarea name="team_members" class="form-control" id="team_members" rows="3" placeholder="Jon Snow, Daenerys, Melisandre, Arya Stark" required></textarea>
   </div>
 
   <button type="submit" class="btn btn-outline-primary float-end">Submit</button>
