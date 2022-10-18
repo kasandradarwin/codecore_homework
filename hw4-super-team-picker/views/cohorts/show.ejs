@@ -8,6 +8,7 @@
     <h5><%- cohort.team_name %></h5>
     <p class="card-body">
       <%- cohort.members %>
+      
     </p>
 <hr/>
 <br>
@@ -21,9 +22,10 @@
   }else if(selectedmethod === "number-per-team"){
     numberperteamchecked="checked"
   } 
-  console.log("selected method", selectedmethod)
-  console.log("number per team:" , numberperteamchecked)
-  console.log("team count:" ,teamcountchecked)
+
+  
+  let = maxquantity = (cohort.members.split(",")).length
+  console.log("max quantity" , maxquantity)
 
 
   
@@ -46,7 +48,9 @@
   <div class="form-group">
     <br>
     <label for="quantity">Quantity</label>
-    <input type="number" class="form-control" id="quantity" name="quantity" min="1" max="<%cohort.members.length%>" <%if(enteredquantity){%> value="<%-enteredquantity%>" <%}%> required>
+    <input type="number" class="form-control" id="quantity" name="quantity" min="1" max="<%-maxquantity%>" <%if(enteredquantity){%> value="<%-enteredquantity%>" <%}%> required>
+
+
   </div>
   <br>
   <form action="/cohorts/<%- cohort.id %>" method="SUBMIT">
@@ -54,11 +58,7 @@
   <button type="submit" class="btn btn-outline-primary btn-block">Assign Teams</button>
   
 </form>
-  
-  
-    
 </div>
-
 
 
 
@@ -110,7 +110,7 @@ return finalteams
 
 } %>
    
-<%let assignedTeam; %>
+<%let assignedTeam %>
 <%if(method === 'team-count'){ 
     assignedTeam = cohort.members.split(",") 
     assignedTeam = teamCount(assignedTeam, quantity)
