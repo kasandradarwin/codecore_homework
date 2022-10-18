@@ -1,0 +1,36 @@
+<%- include("../partials/header.ejs")%>
+
+<h1>Edit Cohort</h1>
+
+<!-- the edit form.. I recreated the form instead of pulling it 
+  in from a 'partials' file, because I wanted to be able to
+  populate the values to make editing easier -->
+
+<form action="/cohorts/<%- cohort.id %>" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+  <div class="form-group mb-3">
+      <label for="logo_url">Logo Url</label>
+      <input name="logo_url" type="url" class="form-control" id="logo_url" 
+      <% if (cohort.logo_url) { %> 
+      value="<%-cohort.logo_url%>"
+      <% } %> 
+        />
+
+   </div>
+  
+  <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Name</label>
+      <input name="team_name" input type="text" class="form-control" id="team_name" value="<%-cohort.team_name%>">
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label">Members</label>
+      <input name="team_members" input type="text" class="form-control" id="team_members" rows="3" value="<%-cohort.members%> ">
+    </div>
+  
+      <input type="submit" value="Submit Changes" class="btn btn-outline-primary float-end">
+
+  </form>
+
+
+<%- include("../partials/footer.ejs")%>
+

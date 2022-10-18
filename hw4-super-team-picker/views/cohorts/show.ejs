@@ -1,0 +1,173 @@
+<%- include("../partials/header.ejs")%>
+
+<!-- This page is a beast, but not every beast is ugly, right? 
+  Some have really kind hearts, like this page
+I found it was easier to have the functions on this page directly -->
+
+<h1>Cohorts</h1>
+
+<div class="card mb-4">
+  <div class="card-body">
+    <h5><%- cohort.team_name %></h5>
+    <p class="card-body">
+      <%- cohort.members %>
+      
+    </p>
+<hr/>
+<br>
+
+<p> Method</p>
+<form method="get" action="/cohorts/<%-cohort.id%>">
+  <% let teamcountchecked = ""
+  let numberperteamchecked =""
+  if(selectedmethod ==="team-count"){
+    teamcountchecked= "checked"
+  }else if(selectedmethod === "number-per-team"){
+    numberperteamchecked="checked"
+  } 
+
+  // This is specifically for the quantity field, so that you can not 
+  // attempt to divide the teams into group larger than the team size
+
+  let = maxquantity = (cohort.members.split(",")).length
+  %>
+
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="method" id="flexRadioDefault1"  <%-teamcountchecked%> value="team-count">
+    <label class="form-check-label" for="flexRadioDefault1">
+      Team Count
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="method" id="flexRadioDefault2" <%-numberperteamchecked%> value="number-per-team">
+    <label class="form-check-label" for="flexRadioDefault2" >
+      Number Per Team
+    
+    </label>
+  </div>
+  <div class="form-group">
+    <br>
+    <label for="quantity">Quantity</label>
+    <input type="number" class="form-control" id="quantity" name="quantity" min="1" max="<%-maxquantity%>" <%if(enteredquantity){%> value="<%-enteredquantity%>" <%}%> required>
+
+
+  </div>
+  <br>
+  <form action="/cohorts/<%- cohort.id %>" method="SUBMIT">
+    <input type="hidden" name="_method" value="PATCH">
+  <button type="submit" class="btn btn-outline-primary btn-block">Assign Teams</button>
+  
+</form>
+</div>
+
+
+
+<!-- //shuffles the order of the array. I made this separate
+   from the other functions since its used in both -->
+
+<%function shuffler(teamArray) {
+    for (let i = 0; i < teamArray.length; i++) {
+        let placeholder = teamArray[i]
+        let randomtmember =Math.floor(Math.random() * (1 + i))
+        teamArray[i] = teamArray[randomtmember]
+        teamArray[randomtmember] = placeholder
+    }   
+    return teamArray
+}%>
+
+<!-- split the cohort into a certain number of Teams -->
+
+<% function teamCount (members, quantity){
+  
+    let pool = shuffler(members)
+    let teamsize = Math.floor(pool.length / quantity)
+    let finalteams = []
+  
+   for (let i = 0; i < quantity; i++) {
+      finalteams.push((pool.splice(0,teamsize)))
+   }
+//catches the overhang
+   if (pool.length > 0){
+    for (let i = 0; i < finalteams.length; i++) {
+      if(pool.length >0){
+        let element = pool.splice(0,1)
+        finalteams[i].push(element)
+      }else{
+        break;
+      }
+  
+    }
+   }
+      
+        return finalteams
+} %>
+
+<!-- splits the cohort into teams of the given number -->
+
+<%function numberPerTeam(members, quantity){
+
+    let pool = shuffler(members)
+    let finalteams = []
+  
+
+      while (pool.length > 0) {
+        let element = pool.splice(0,quantity)
+      console.log("pool size remaining: ", pool.length)
+      console.log("element: ",element)
+ 
+        finalteams.push(element)
+      }
+ 
+return finalteams
+
+} %>
+
+<!-- Although the assigned teams is repeated, 
+  if I declared it outside of the if statement,
+   it did weird things that I wasn't ready for-->
+   
+<%let assignedTeam %>
+<%if(method === 'team-count'){ 
+    assignedTeam = cohort.members.split(",") 
+    assignedTeam = teamCount(assignedTeam, quantity)
+}else if(method === 'number-per-team'){ 
+    assignedTeam = cohort.members.split(",") 
+    assignedTeam = numberPerTeam(assignedTeam, quantity)
+} %>
+
+<!-- this causes the bootstrap table to only appear when we assign the
+   teams, and then fills in the appropriate information -->
+
+<%if(assignedTeam){ %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Team Members</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for (let team of assignedTeam){ %>
+      <tr>
+        <th scope="row"><%-assignedTeam.indexOf(team)+1%></th>
+        <td><%-team%></td>
+      </tr>
+      <%} %>
+  </tbody>
+</table>
+<%  } %>
+
+<!-- There are the edit and delete buttons. 
+  The edit is just a link that redirects to the edit page,
+the delete button has function of its own -->
+
+<form action="/cohorts/<%- cohort.id %>" method="POST">
+  <a class="btn btn-primary show-page-btn" href="/cohorts/<%- cohort.id %>/edit" id="edit">EDIT COHORT</a>
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" class="btn btn-danger show-page-btn" value="DELETE COHORT">
+  <input type="hidden" name="_method" value="PATCH">
+</form>
+  
+
+<%- include("../partials/footer.ejs")%>
+
