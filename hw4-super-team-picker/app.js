@@ -29,7 +29,6 @@ app.use(
 // the welcome/home page:
 
 app.get('/',(req, res) => {
-   // res.send("<h1> This is my root page. Hi there! </h1>")
    res.render('home')
    })
 
@@ -37,7 +36,6 @@ app.use('/cohorts', cohorts)
 
 const PORT = process.env.PORT || 3000;
 const DOMAIN = 'localhost'
-//const ENVIRONMENT = app.get('env')
 
 
 app.listen(PORT, DOMAIN, () =>{

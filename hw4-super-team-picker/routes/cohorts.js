@@ -3,9 +3,6 @@ const express = require('express');
 const knex = require('../db/client')
 const router = express.Router()
 
-// router.use("/cohorts", router)
-// router.use("/new", router)
-
 // index all the cohorts
 router.get('/',(req, res) => {
     knex('cohorts')
@@ -52,18 +49,17 @@ router.get('/:id', (req, res) => {
     });
 
   
-//   //------------Render Edit cohort template---------------
+//------------Render Edit cohort template---------------
   router.get('/:id/edit', (req, res) => {
     knex('cohorts')
     .where('id', req.params.id)
     .first()
     .then( cohort => {
       res.render('cohorts/edit', {cohort: cohort})
-      //  res.render(`/cohorts/edit/${req.query.id}`, {cohort: cohort})
     })
   })
   
-//   //---------------------Update particular cohort---------------
+//---------------------Update particular cohort---------------
   router.patch('/:id', (req, res) => {
     knex('cohorts')
     .where('id', req.params.id)
