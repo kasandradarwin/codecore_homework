@@ -81,11 +81,44 @@
     let pool = shuffler(members)
     let teamsize = Math.floor(pool.length / quantity)
     let finalteams = []
+    counter = 0
 
-    while (pool.length > 0) {
+    console.log("members", members)
+    console.log("teamsize", teamsize)
+    console.log("pool", pool)
+
+  
+   for (let i = 0; i < quantity; i++) {
       finalteams.push((pool.splice(0,teamsize)))
+   }
+
+   if (pool.length > 0){
+    for (let i = 0; i < finalteams.length; i++) {
+      if(pool.length >0){
+        let element = pool.splice(0,1).flat().toString()
+        finalteams[i].push(element)
+      }else{
+        break;
+      }
       
     }
+   }
+  
+
+
+
+
+    // THIS WORKS (kinda), DONT TOUCH:
+    // while (pool.length > 0) {
+    //   finalteams.push((pool.splice(0,teamsize)))
+    //   console.log("team size: " ,teamsize)
+
+    //   if (finalteams.length == quantity) {
+    //     for (let i = 0; i < pool.length; i++) {
+    //        finalteams[i].push((pool.splice(0,1)))
+    //   }
+    // }
+    // }
       
         return finalteams
 } %>
