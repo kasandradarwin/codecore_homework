@@ -1,5 +1,5 @@
 const random_words = [
-"medellin",
+"MEDELLIN",
 ];
 
 let currentWord = "";
@@ -14,7 +14,7 @@ function randomWord() {
 
 };
 
-// this creates the keyboard, stored in a function for easy reset. Reset function below re-activated the disable keys.
+// this creates the keyboard, splitting the alphabet up and mapping through, setting the id to the letter , then rejoining stored in a function for easy reset. Reset function below re-activated the disable keys.
 function generateButtons() {
     let buttonsHTML = 'ABCDEFGHIJKLMONPQRSTUVWXYZ'.split('').map(letter =>
       `
@@ -43,6 +43,10 @@ function generateButtons() {
 // bug to fix: wrong guessing goes up to 7 (should only go up to 6), 
 //and the gallows picture for 7 doesn't exist-- so it disappears. Doesn't seem to be triggering checkloss function
 //if I remove the incorrectguesses +1, then its always one picture behind
+
+// if chosen letter doesn't exist-- push the chosen letter to the guessed array, or return null
+//get id of chosen letter/button, disables them once they are selected
+//
 function selectedLetter(chosenLetter) {
     guessed.indexOf(chosenLetter) === -1 ? guessed.push(chosenLetter) : null;
     
@@ -65,41 +69,35 @@ function selectedLetter(chosenLetter) {
 function checkWin() {
     if(activeBoard === currentWord){
         document.getElementById('keyboard').innerHTML = 'You won!';
+        reset()
     }
 }
 // checks to see if the max number or wrong guesses have been reached
 function checkLoss() {
-    if (incorrectGuess === maxWrong) {
+    if (incorrectGuesses === maxWrong) {
         document.getElementById('playingBoard').innerHTML = `The word was: ${currentWord}`;
         document.getElementById('keyboard').innerHTML = 'You Lost';
     }
 
 }
-
+// checking to see if the letter exists in the word, if not returns the underscore
+//if yes-- prints the correct letter
 function guessedWord(letter) {
-    console.log("current word" , playingBoard[0])
-    console.log("current word" , playingBoard[1])
-    console.log("current word" , playingBoard[2])
-    console.log("current word" , playingBoard[3])
+   
     activeBoard = currentWord.split('').map(letter => (guessed.indexOf(letter) >= 0 ? letter : " _ ")).join('');
     document.getElementById('playingBoard').innerHTML = activeBoard;
     console.log("letter" , letter)
     console.log("word status" ,activeBoard)
-    console.log("current word" , currentWord)
-    console.log("current word" , playingBoard)
-    console.log("current word" , playingBoard[0])
-    console.log("current word" , playingBoard[1])
-    console.log("current word" , playingBoard[2])
-    console.log("current word" , playingBoard[3])
+
 
 }
 
 // updated the incorrect guess count.
 function updateIncorrectGuesses() {
     document.getElementById('incorrectGuesses').innerHTML = incorrectGuesses;
-    if (incorrectGuesses > 5){
-        checkLoss()
-    }
+    // if (incorrectGuesses > 5){
+    //     checkLoss()
+    // }
 }
 
 //resets the whole board
