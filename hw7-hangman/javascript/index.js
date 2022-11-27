@@ -1,6 +1,9 @@
-const random_words = [
-"MEDELLIN",
-];
+// import { random_words } from './random_words.js'
+const random_words = require('./random_words.js')
+
+// const random_words = [
+// "MED",
+// ];
 
 let currentWord = "";
 let maxWrong = 6;
@@ -22,6 +25,7 @@ function generateButtons() {
           class="btn btn-lg btn-dark m-2"
           id='${letter}'
           onClick="selectedLetter('${letter}')"
+          onKeyPress="selectedLetter('${letter}')"
         >
           ${letter}
         </button>
@@ -32,32 +36,24 @@ function generateButtons() {
 
 
 // This function kicks in when the user selects a letter, checks to see if its in the word or not. Either way it 
-//disables the letter so the user cannot make the same guess twice-- pushed to a "guessed" array.
+//disables the letter so the user cannot make the same guess twice-- pushes to a "guessed" array.
 
-//if letter is in the word, if the selected letter is in the word it called the "guessedword " and 
-// checks to see if the game is won
+//if letter is in the word, it calls the guessedword function and checks to see if the game is won
 
 //if letter is not in the word, it updates the hangman picture, adds to the mistakes, and checks to 
-//see if that was the last allowed incorrect guess
+//see if the game is lost (if the max wrong guesses was reached)
 
-// bug to fix: wrong guessing goes up to 7 (should only go up to 6), 
-//and the gallows picture for 7 doesn't exist-- so it disappears. Doesn't seem to be triggering checkloss function
-//if I remove the incorrectguesses +1, then its always one picture behind
-
-// if chosen letter doesn't exist-- push the chosen letter to the guessed array, or return null
-//get id of chosen letter/button, disables them once they are selected
-//
 function selectedLetter(chosenLetter) {
     guessed.indexOf(chosenLetter) === -1 ? guessed.push(chosenLetter) : null;
-    
-    console.log(chosenLetter)
+
     document.getElementById(chosenLetter).setAttribute('disabled', true);
 
     if (currentWord.includes(chosenLetter)){
         guessedWord(chosenLetter);
         checkWin();
     } else {
-        document.getElementById('hangmanPic').src = './images/gallows' + (incorrectGuesses + 1) + '.jpg';
+        document.getElementById('hangmanPic').src =
+           './images/gallows' + (incorrectGuesses + 1) + '.jpg';
         incorrectGuesses++;
         updateIncorrectGuesses();
         checkLoss();
@@ -65,11 +61,27 @@ function selectedLetter(chosenLetter) {
     }
 }
 
+
+// the two functions below are called in their respective "check loss" and "check win" functions below.
+function congrats(){
+  alert("You won!!");
+  reset()
+}
+
+function betterLuckNextTime(){
+  alert("Ah, too bad. Try again!");
+  reset()
+}
+
+
 //checks to see if the guessed word and the current "random" word is the same
 function checkWin() {
     if(activeBoard === currentWord){
-        document.getElementById('keyboard').innerHTML = 'You won!';
-        reset()
+        document.getElementById('keyboard').innerHTML = 'You won!!!';
+        setTimeout(congrats, 100);
+
+        const winSound = new Audio("./sounds/win-sound.wav")
+ 
     }
 }
 // checks to see if the max number or wrong guesses have been reached
@@ -77,6 +89,8 @@ function checkLoss() {
     if (incorrectGuesses === maxWrong) {
         document.getElementById('playingBoard').innerHTML = `The word was: ${currentWord}`;
         document.getElementById('keyboard').innerHTML = 'You Lost';
+        setTimeout(betterLuckNextTime, 100);
+        
     }
 
 }
@@ -95,9 +109,6 @@ function guessedWord(letter) {
 // updated the incorrect guess count.
 function updateIncorrectGuesses() {
     document.getElementById('incorrectGuesses').innerHTML = incorrectGuesses;
-    // if (incorrectGuesses > 5){
-    //     checkLoss()
-    // }
 }
 
 //resets the whole board
