@@ -1,15 +1,32 @@
-// import { random_words } from './random_words.js'
-const random_words = require('./random_words.js')
+// import random_words from './random_words.js'
+// const random_words = require('./random_words.js')
 
-// const random_words = [
-// "MED",
-// ];
+const random_words = [
+"MED",
+];
+
+// let random_words = [
+//   "curious",
+//   "quaint",
+//   "motion",
+//   "agreement",
+//   "scarce",
+//   "abundant",
+//   "psychotic",
+//   "creator",
+//   "luxuriant",
+//   "preserve",
+//   "promise",
+//   ];
 
 let currentWord = "";
 let maxWrong = 6;
 let incorrectGuesses = 0;
 let guessed = [];
 let activeBoard = null;
+
+const winSound = new Audio("./sounds/win-sound.wav")
+const loseSound = new Audio("./sounds/lose-sound.wav")
 
 // This function will randomly select a word from a list of word in the random_words array-- which at the moment is just one word.
 function randomWord() {
@@ -76,20 +93,21 @@ function betterLuckNextTime(){
 
 //checks to see if the guessed word and the current "random" word is the same
 function checkWin() {
-    if(activeBoard === currentWord){
-        document.getElementById('keyboard').innerHTML = 'You won!!!';
-        setTimeout(congrats, 100);
+  if(activeBoard === currentWord){
+    winSound.play()
+    document.getElementById('keyboard').innerHTML = 'You won!!!';
+    setTimeout(congrats, 200);
 
-        const winSound = new Audio("./sounds/win-sound.wav")
  
     }
 }
 // checks to see if the max number or wrong guesses have been reached
 function checkLoss() {
     if (incorrectGuesses === maxWrong) {
+        loseSound.play()
         document.getElementById('playingBoard').innerHTML = `The word was: ${currentWord}`;
         document.getElementById('keyboard').innerHTML = 'You Lost';
-        setTimeout(betterLuckNextTime, 100);
+        setTimeout(betterLuckNextTime, 200);
         
     }
 
@@ -101,7 +119,7 @@ function guessedWord(letter) {
     activeBoard = currentWord.split('').map(letter => (guessed.indexOf(letter) >= 0 ? letter : " _ ")).join('');
     document.getElementById('playingBoard').innerHTML = activeBoard;
     console.log("letter" , letter)
-    console.log("word status" ,activeBoard)
+    console.log("word status" , activeBoard)
 
 
 }
@@ -117,7 +135,7 @@ function reset() {
     incorrectGuesses = 0;
     guessed = [];
     document.getElementById('hangmanPic').src = './images/gallows0.jpg';
-    document.getElementById('incorrectGuesses').innerHTML = incorrectGuesses;
+    // document.getElementById('incorrectGuesses').innerHTML = incorrectGuesses;
 
     randomWord();
     guessedWord();
@@ -125,9 +143,8 @@ function reset() {
     generateButtons();
 }
 
-// document.getElementById('maxWrong').innerHTML = maxWrong;
 
-
+//Initial startup
 randomWord();
 generateButtons();
 guessedWord();

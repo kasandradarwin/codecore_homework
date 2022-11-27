@@ -1,4 +1,4 @@
-exports.random_words = [
+export let random_words = [
 "curious",
 "quaint",
 "motion",
@@ -9,7 +9,5 @@ exports.random_words = [
 "creator",
 "luxuriant",
 "preserve",
-"promise"
-
-
-]
+"promise",
+];
