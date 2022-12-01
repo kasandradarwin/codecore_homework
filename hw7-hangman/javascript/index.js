@@ -1,22 +1,22 @@
 // import random_words from './random_words.js'
 // const random_words = require('./random_words.js')
 
+
 const random_words = [
-"MED",
+"HANGMAN",
 ];
 
 // let random_words = [
-//   "curious",
-//   "quaint",
-//   "motion",
-//   "agreement",
-//   "scarce",
-//   "abundant",
-//   "psychotic",
-//   "creator",
-//   "luxuriant",
-//   "preserve",
-//   "promise",
+//   "CURIOUS",
+//   "QUAINT",
+//   "MOTION",
+//   "AGREEMENT",
+//   "SCARCE",
+//   "ABUNDANT",
+//   "CREATOR",
+//   "LUXURIOUS",
+//   "PRESERVE",
+//   "PROMISE",
 //   ];
 
 let currentWord = "";
@@ -96,9 +96,7 @@ function checkWin() {
   if(activeBoard === currentWord){
     winSound.play()
     document.getElementById('keyboard').innerHTML = 'You won!!!';
-    setTimeout(congrats, 200);
-
- 
+    setTimeout(congrats, 100);
     }
 }
 // checks to see if the max number or wrong guesses have been reached
@@ -107,8 +105,7 @@ function checkLoss() {
         loseSound.play()
         document.getElementById('playingBoard').innerHTML = `The word was: ${currentWord}`;
         document.getElementById('keyboard').innerHTML = 'You Lost';
-        setTimeout(betterLuckNextTime, 200);
-        
+        setTimeout(betterLuckNextTime, 100); 
     }
 
 }
@@ -135,7 +132,6 @@ function reset() {
     incorrectGuesses = 0;
     guessed = [];
     document.getElementById('hangmanPic').src = './images/gallows0.jpg';
-    // document.getElementById('incorrectGuesses').innerHTML = incorrectGuesses;
 
     randomWord();
     guessedWord();
@@ -144,7 +140,7 @@ function reset() {
 }
 
 
-//Initial startup
+//Initial setup
 randomWord();
 generateButtons();
 guessedWord();
