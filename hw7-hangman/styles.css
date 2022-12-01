@@ -1,8 +1,20 @@
+
+body {
+    border: 20px groove #000000;
+border-radius: 80px;
+}
 p {
     font-weight: 300;
 }
 
-h3, h1 {
+h3 {
     color: #008080;
+
+} 
+
+h1 {
+    text-shadow: 28px 22px 6px rgba(14, 1, 15, 0.4);
+    color: #0e010f;
 }
+
 

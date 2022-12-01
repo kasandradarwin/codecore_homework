@@ -32,24 +32,27 @@ const loseSound = new Audio("./sounds/lose-sound.wav")
 function randomWord() {
    currentWord = random_words[Math.floor(Math.random()*random_words.length)]
 
-};
-
-// this creates the keyboard, splitting the alphabet up and mapping through, setting the id to the letter , then rejoining stored in a function for easy reset. Reset function below re-activated the disable keys.
-function generateButtons() {
+  };
+  
+  // this creates the keyboard, splitting the alphabet up and mapping through, setting the id to the letter , then rejoining stored in a function for easy reset. Reset function below re-activated the disable keys.
+  function generateButtons() {
     let buttonsHTML = 'ABCDEFGHIJKLMONPQRSTUVWXYZ'.split('').map(letter =>
       `
-        <button
-          class="btn btn-lg btn-dark m-2"
-          id='${letter}'
-          onClick="selectedLetter('${letter}')"
-          onKeyPress="selectedLetter('${letter}')"
-        >
+      <button
+      class="btn btn-lg btn-dark m-2"
+      id='${letter}'
+      onClick="selectedLetter('${letter}')"
+      onKeyPress="selectedLetter('${letter}')"
+          >
           ${letter}
-        </button>
-      `).join('');
-  
-    document.getElementById('keyboard').innerHTML = buttonsHTML;
-  }
+          </button>
+          `).join('');
+          
+          document.getElementById('keyboard').innerHTML = buttonsHTML;
+        }
+        
+        
+    
 
 
 // This function kicks in when the user selects a letter, checks to see if its in the word or not. Either way it 
@@ -74,6 +77,11 @@ function selectedLetter(chosenLetter) {
         incorrectGuesses++;
         updateIncorrectGuesses();
         checkLoss();
+        if (incorrectGuesses > 3){
+      
+          // document.getElementById('keyboard').removeAttribute('class', "btn-dark");
+          document.getElementById('keyboard').setAttribute('class', "btn btn-lg btn-danger m-2");
+        }
     
     }
 }
@@ -132,6 +140,7 @@ function reset() {
     incorrectGuesses = 0;
     guessed = [];
     document.getElementById('hangmanPic').src = './images/gallows0.jpg';
+    document.getElementById('keyboard').removeAttribute('class', "btn btn-lg btn-danger m-2");
 
     randomWord();
     guessedWord();
