@@ -1,7 +1,3 @@
-// import random_words from './random_words.js'
-// const random_words = require('./random_words.js')
-
-
 const random_words = [
 "HANGMAN",
 ];
@@ -51,8 +47,6 @@ function randomWord() {
           document.getElementById('keyboard').innerHTML = buttonsHTML;
         }
         
-        
-    
 
 
 // This function kicks in when the user selects a letter, checks to see if its in the word or not. Either way it 
@@ -77,15 +71,15 @@ function selectedLetter(chosenLetter) {
         incorrectGuesses++;
         updateIncorrectGuesses();
         checkLoss();
+
+          //keyboard background turns red when you're running out of guesses
         if (incorrectGuesses > 3){
-      
-          // document.getElementById('keyboard').removeAttribute('class', "btn-dark");
+    
           document.getElementById('keyboard').setAttribute('class', "btn btn-lg btn-danger m-2");
         }
     
     }
 }
-
 
 // the two functions below are called in their respective "check loss" and "check win" functions below.
 function congrats(){
@@ -104,7 +98,7 @@ function checkWin() {
   if(activeBoard === currentWord){
     winSound.play()
     document.getElementById('keyboard').innerHTML = 'You won!!!';
-    setTimeout(congrats, 100);
+    setTimeout(congrats, 1000);
     }
 }
 // checks to see if the max number or wrong guesses have been reached
@@ -113,7 +107,7 @@ function checkLoss() {
         loseSound.play()
         document.getElementById('playingBoard').innerHTML = `The word was: ${currentWord}`;
         document.getElementById('keyboard').innerHTML = 'You Lost';
-        setTimeout(betterLuckNextTime, 100); 
+        setTimeout(betterLuckNextTime, 1000); 
     }
 
 }
